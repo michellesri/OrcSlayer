@@ -1,8 +1,8 @@
 {
-  "name": "OrcSlayer",
+  "name": "orc-slayer",
   "version": "0.1.0",
   "description": "Bitmap color transformer",
-  "main": "OrcSlayer.js",
+  "main": "orc-slayer.js",
   "scripts": {
     "lint": "eslint .",
     "pretest": "npm run lint",
@@ -10,7 +10,7 @@
     "build": "npm install",
     "dev": "npm install --save-dev",
     "watch": "npm run test -- -w",
-    "start": "node ./lib/OrcSlayer.js"
+    "start": "node ./lib/orc-slayer.js"
   },
   "repository": {
     "type": "git",
