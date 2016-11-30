@@ -4,13 +4,9 @@
   "description": "Adventure Game",
   "main": "OrcSlayer.js",
   "scripts": {
-    "lint": "eslint .",
-    "pretest": "npm run lint",
-    "test": "mocha",
-    "build": "npm install",
-    "dev": "npm install --save-dev",
-    "watch": "npm run test -- -w",
-    "start": "node ./lib/OrcSlayer.js"
+    "test": "exit 0",
+    "build": "webpack",
+    "start": "webpack-dev-server --inline"
   },
   "repository": {
     "type": "git",
