@@ -1,0 +1,31 @@
+{
+  "name": "OrcSlayer",
+  "version": "0.1.0",
+  "description": "Bitmap color transformer",
+  "main": "OrcSlayer.js",
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "mocha",
+    "build": "npm install",
+    "dev": "npm install --save-dev",
+    "watch": "npm run test -- -w",
+    "start": "node ./lib/OrcSlayer.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OrcSlayers/OrcSlayer.git"
+  },
+  "author": "@markgreenwood",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/OrcSlayers/OrcSlayer/issues"
+  },
+  "homepage": "https://github.com/OrcSlayers/OrcSlayer#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "eslint": "^3.8.1",
+    "mocha": "^3.1.2"
+  },
+  "dependencies": {}
+}
