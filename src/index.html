@@ -14,7 +14,7 @@
     <button id="instructions-btn">Instructions</button>
     <button id="play-btn" ng-click="activeTab = { showIntro: false, showInstructions: false, showGame: true };">Play</button>
   </div>
-  <div class="tab-content" id="game-page" ng-show="activeTab.showGame">
+  <div class="tab-content" id="game-page" ng-show="activeTab.showGame" ng-controller="gameController">
     <div id="game-text">{{roomDescription}}</div>
     <div id="control-panel">
       <span id="action-btns">
@@ -26,10 +26,10 @@
         <p id="inventory-content">Nothing equipped.</p>
       </span>
       <span id="direction-ctrl">
-        <button id="n-btn" class="direction-button">N</button>
-        <button id="e-btn" class="direction-button">E</button>
-        <button id="s-btn" class="direction-button">S</button>
-        <button id="w-btn" class="direction-button">W</button>
+        <button id="n-btn" class="direction-button" ng-click="move('N')">N</button>
+        <button id="e-btn" class="direction-button" ng-click="move('E')">E</button>
+        <button id="s-btn" class="direction-button" ng-click="move('S')">S</button>
+        <button id="w-btn" class="direction-button" ng-click="move('W')">W</button>
       </span>
     </div>
   </div>
