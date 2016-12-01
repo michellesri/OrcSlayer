@@ -23,6 +23,20 @@ export default function gameController($scope){ //eslint-disable-line no-unused-
     $scope.roomDescription = rooms[player.room].description;
   };
 
+  $scope.equip = function(){
+    console.log('player clicked equip item');
+    if (rooms[player.room].item != null){
+      var dropped = player.item;
+      console.log(rooms[player.room].item);
+      player.item=rooms[player.room].item;
+      rooms[player.room].item=dropped;
+    }
+    else {
+      alert('There is nothing in this room to equip.');
+    }
+    console.log('I have this equipped: ', player.item);
+    $scope.playerItem = player.item;
+  };
 }
 
 

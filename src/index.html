@@ -18,12 +18,12 @@
     <div id="game-text">{{roomDescription}}</div>
     <div id="control-panel">
       <span id="action-btns">
-        <button id="equip-btn">Equip</button>
+        <button id="equip-btn" ng-click="equip();">Equip</button>
         <button id="fight-btn">Fight</button>
         <button id="run-btn">Run</button>
       </span>
       <span id="inventory">
-        <p id="inventory-content">Nothing equipped.</p>
+        <p id="inventory-content">Equipped: {{playerItem}}</p>
       </span>
       <span id="direction-ctrl">
         <button id="n-btn" class="direction-button" ng-click="move('N')">N</button>
