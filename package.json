@@ -2,7 +2,7 @@
   "name": "orc-slayer",
   "version": "0.1.0",
   "description": "Adventure Game",
-  "main": "OrcSlayer.js",
+  "main": "orcSlayer.js",
   "scripts": {
     "test": "exit 0",
     "build": "webpack",
@@ -18,7 +18,13 @@
     "url": "https://github.com/OrcSlayers/OrcSlayer/issues"
   },
   "homepage": "https://github.com/OrcSlayers/OrcSlayer#readme",
-  "devDependencies": {},
+  "devDependencies": {
+    "eslint": "^3.11.1",
+    "eslint-loader": "^1.6.1",
+    "html-webpack-plugin": "^2.24.1",
+    "webpack": "^1.13.3",
+    "webpack-dev-server": "^1.16.2"
+  },
   "dependencies": {
     "angular": "^1.5.9"
   }

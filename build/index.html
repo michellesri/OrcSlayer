@@ -1,21 +1,22 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="orcSlayer">
+<html lang="en" ng-app="OrcSlayer">
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="main.css">
   <title>Orc Slayer</title>
 </head>
-<body ng-controller="globalController">
+<body>
   <div class="static" id="header">
     <h1>Orc Slayer!</h1>
   </div>
-  <div class="tab-content" id="intro-page" ng-show="activeTab.showIntro">
-    <p>we're at the intro page</p>
-    <button id="instructions-btn">Instructions</button>
-    <button id="play-btn" ng-click="activeTab = { showIntro: false, showInstructions: false, showGame: true };">Play</button>
+  <div class="tab-content" id="intro-page">
+    <button id="instructions-btn">Instructions</button> 
+    <button id="play-btn">Play</button> 
   </div>
-  <div class="tab-content" id="game-page" ng-show="activeTab.showGame">
-    <div id="game-text">we're in the game page. this is the starting room.</div>
+  <div class="tab-content" id="game-page">
+    <div id="game-text">
+      You are here.
+    </div>
     <div id="control-panel">
       <span id="action-btns">
         <button id="equip-btn">Equip</button>
@@ -26,20 +27,20 @@
         <p id="inventory-content">Nothing equipped.</p>
       </span>
       <span id="direction-ctrl">
-        <button id="n-btn" ng-click="">N</button>
+        <button id="n-btn">N</button>
         <button id="e-btn">E</button>
         <button id="s-btn">S</button>
         <button id="w-btn">W</button>
       </span>
     </div>
   </div>
-  <div class="tab-content" id="instruction-page" ng-show="activeTab.showInstructions">
+  <div class="tab-content" id="instruction-page">
     <h1>Instructions</h1>
     <p>Instructions will go here.</p>
-    <button id="play-btn">Play</button>
+    <button id="play-btn">Play</button> 
   </div>
   <div class="static" id="footer">
   </div>
-
-</body>
+  
+<script type="text/javascript" src="orcSlayer.js"></script></body>
 </html>
