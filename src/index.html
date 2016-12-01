@@ -11,7 +11,7 @@
   </div>
   <div class="tab-content" id="intro-page" ng-show="activeTab.showIntro">
     <p>we're at the intro page</p>
-    <button id="instructions-btn">Instructions</button>
+    <button id="instructions-btn" ng-click="activeTab = { showIntro: false, showInstructions: true, showGame: false };">Instructions</button>
     <button id="play-btn" ng-click="activeTab = { showIntro: false, showInstructions: false, showGame: true };">Play</button>
   </div>
   <div class="tab-content" id="game-page" ng-show="activeTab.showGame" ng-controller="gameController as gc">
