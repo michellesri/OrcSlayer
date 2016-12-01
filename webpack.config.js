@@ -1,10 +1,10 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: './src/OrcSlayer.js',
+  entry: './src/orcSlayer.js',
   output: {
     path: './build',
-    filename: 'OrcSlayer.js'
+    filename: 'orcSlayer.js'
   },
   plugins: [
     new HtmlWebpackPlugin({
