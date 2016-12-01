@@ -11,7 +11,7 @@ export default function gameController($scope){ //eslint-disable-line no-unused-
   $scope.player=player;
   $scope.roomDescription = rooms[player.room].description;
 
-  $scope.move = function(direction){
+  this.move = function(direction){
     console.log('player moved in this direction', direction);
     if (rooms[player.room][direction] != null){
       player.room = rooms[player.room][direction];
@@ -23,7 +23,7 @@ export default function gameController($scope){ //eslint-disable-line no-unused-
     $scope.roomDescription = rooms[player.room].description;
   };
 
-  $scope.equip = function(){
+  this.equip = function(){
     console.log('player clicked equip item');
     if (rooms[player.room].item != null){
       var dropped = player.item;

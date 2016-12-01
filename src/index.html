@@ -5,7 +5,7 @@
   <link rel="stylesheet" href="main.css">
   <title>Orc Slayer</title>
 </head>
-<body ng-controller="globalController">
+<body ng-controller="globalController as globalController">
   <div class="static" id="header">
     <h1>Orc Slayer!</h1>
   </div>
@@ -14,11 +14,11 @@
     <button id="instructions-btn">Instructions</button>
     <button id="play-btn" ng-click="activeTab = { showIntro: false, showInstructions: false, showGame: true };">Play</button>
   </div>
-  <div class="tab-content" id="game-page" ng-show="activeTab.showGame" ng-controller="gameController">
+  <div class="tab-content" id="game-page" ng-show="activeTab.showGame" ng-controller="gameController as gc">
     <div id="game-text">{{roomDescription}}</div>
     <div id="control-panel">
       <span id="action-btns">
-        <button id="equip-btn" ng-click="equip();">Equip</button>
+        <button id="equip-btn" ng-click="gc.equip();">Equip</button>
         <button id="fight-btn">Fight</button>
         <button id="run-btn">Run</button>
       </span>
@@ -26,10 +26,10 @@
         <p id="inventory-content">Equipped: {{playerItem}}</p>
       </span>
       <span id="direction-ctrl">
-        <button id="n-btn" class="direction-button" ng-click="move('N')">N</button>
-        <button id="e-btn" class="direction-button" ng-click="move('E')">E</button>
-        <button id="s-btn" class="direction-button" ng-click="move('S')">S</button>
-        <button id="w-btn" class="direction-button" ng-click="move('W')">W</button>
+        <button id="n-btn" class="direction-button" ng-click="gc.move('N')">N</button>
+        <button id="e-btn" class="direction-button" ng-click="gc.move('E')">E</button>
+        <button id="s-btn" class="direction-button" ng-click="gc.move('S')">S</button>
+        <button id="w-btn" class="direction-button" ng-click="gc.move('W')">W</button>
       </span>
     </div>
   </div>
