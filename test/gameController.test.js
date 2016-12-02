@@ -27,17 +27,17 @@ describe( 'gameController', () => {
     var gc = $controller('gameController', { $scope });
     $scope.player.room = 0;
     gc.equip();
-    assert.equal($scope.player.item, 'turkey drumstick');
+    assert.equal($scope.player.item.name, 'turkey drumstick');
   });
 
   it ('player drops current item if she picks up a new one', () => {
     var gc = $controller('gameController', { $scope });
     $scope.player.room = 2;
-    console.log('\nI am about to equip!\n');
-    console.log('>>> Before equip player ', $scope.player, ' room ', $scope.rooms);
+    // console.log('\nI am about to equip!\n');
+    // console.log('>>> Before equip player ', $scope.player, ' room ', $scope.rooms);
     gc.equip();
-    console.log('>>> After equip player ', $scope.player, ' room ', $scope.rooms);
-    assert.equal($scope.player.item, 'sword');    
+    // console.log('>>> After equip player ', $scope.player, ' room ', $scope.rooms);
+    assert.equal($scope.player.item.name, 'sword');    
   });
 
 });
