@@ -17,19 +17,19 @@
   </div>
   <div class="tab-content" id="game-page" ng-show="activeTab.showGame" ng-controller="gameController as gc">
 
-    <div id="game-text">{{prefix}}{{roomDescription}}{{monsterText}}{{itemText}} <br> {{gameDescription}}</div>
+    <div id="game-text">{{gc.prefix}}{{gc.roomDescription}}{{gc.monsterText}}{{gc.itemText}} <br></div>
     <div id="control-panel">
       <span id="action-btns">
-        <button id="equip-btn" class="game-btn" ng-click="gc.equip();" ng-show="equipButton">Equip</button>
-        <button id="fight-btn" class="game-btn" ng-click="gc.fight();" ng-show="fightButton">Fight</button>
-        <button id="run-btn" class="game-btn" ng-click="gc.run();" ng-show="runButton">Run</button>
-        <button id="talk-btn" class="game-btn" ng-click="gc.talk();" ng-show="talkButton">Talk</button>
+        <button id="equip-btn" class="game-btn" ng-click="gc.equip();" ng-show="gc.equipButton">Equip</button>
+        <button id="fight-btn" class="game-btn" ng-click="gc.fight();" ng-show="gc.fightButton">Fight</button>
+        <button id="run-btn" class="game-btn" ng-click="gc.run();" ng-show="gc.runButton">Run</button>
+        <button id="talk-btn" class="game-btn" ng-click="gc.talk();" ng-show="gc.talkButton">Talk</button>
 
       </span>
       <span id="inventory">
-        <p id="inventory-content">Equipped Item: {{playerItemName}}<br>Item Strength: {{playerItemStrength}}</p>
+        <p id="inventory-content">Equipped Item: {{gc.playerItemName}}<br>Item Strength: {{gc.playerItemStrength}}</p>
       </span>
-      <span id="direction-ctrl" ng-show="moveButtons">
+      <span id="direction-ctrl" ng-show="gc.moveButtons">
         <button id="n-btn" class="direction-button" ng-click="gc.move('N')">N</button>
         <button id="e-btn" class="direction-button" ng-click="gc.move('E')">E</button>
         <button id="s-btn" class="direction-button" ng-click="gc.move('S')">S</button>
