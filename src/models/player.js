@@ -2,7 +2,7 @@
 
 let player = {
   // life: true,
-  room: 1,
+  room: 12,
   item: {name: null, strength: null, text: null}
 };
 

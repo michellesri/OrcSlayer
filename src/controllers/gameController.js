@@ -15,11 +15,11 @@ export default function gameController($scope){ //eslint-disable-line no-unused-
   $scope.directions = ['N', 'E', 'S', 'W'];
   $scope.moveButtons = true;
 
-  $scope.getRandomNum = function(){
+  var getRandomNum = function(){
     return Math.floor(Math.random() * 4) + 1;
   };
 
-  $scope.newView = function(){
+  var newView = function(){
     if(!rooms[player.room].item.name){
       $scope.equipButton = false;
     }
@@ -53,21 +53,21 @@ export default function gameController($scope){ //eslint-disable-line no-unused-
     $scope.itemText= rooms[player.room].item.text;
   };
 
-  $scope.playerRoulette = function(){
-    var randomNum = $scope.getRandomNum();
-    if(randomNum === 1){
-      return player.life = false;
-    }
-  };
+  // var playerRoulette = function(){
+  //   var randomNum = getRandomNum();
+  //   if(randomNum === 1){
+  //     return player.life = false;
+  //   }
+  // };
 
   this.move = function(direction){
     console.log('player moved in this direction', direction);
     if (rooms[player.room][direction] != null){
       player.room = rooms[player.room][direction];
       var entryPrefixes = ['You open the door and enter', 'Passing through the doorway you find yourself in', 'The room you entered is', 'As you close the door you make note of the room around you;'];
-      var randomNum = $scope.getRandomNum();
+      var randomNum = getRandomNum();
       $scope.prefix = entryPrefixes[(randomNum-1)];
-      $scope.newView(); 
+      newView(); 
     }
     else {
       alert('You cannot move in that direction.');
@@ -97,15 +97,17 @@ export default function gameController($scope){ //eslint-disable-line no-unused-
     console.log('I have this equipped: ', player.item.name);
     $scope.playerItemName = player.item.name;
     $scope.playerItemStrength = player.item.strength;
-    $scope.newView(); 
+    newView(); 
   };
 
   this.fight = function(){
     console.log('player clicked fight');
     if (rooms[player.room].monster.name != null){
       console.log('player is fighting this a(n) '+ rooms[player.room].monster.name+ ' with a(n) '+player.item.name);
-      var randomNum = $scope.getRandomNum();
+      var randomNum = getRandomNum();
       var playerStrength = player.item.strength*randomNum;
+      // Cheat code:
+      // playerStrength = 20;
       console.log('Player Attack is ', playerStrength);
       if (playerStrength >= rooms[player.room].monster.strength){
         alert('Congratulations!  You defeated the '+ rooms[player.room].monster.name+'.');
@@ -114,7 +116,7 @@ export default function gameController($scope){ //eslint-disable-line no-unused-
         rooms[player.room].monster.item = null;
         console.log('room is now ', rooms[player.room]);
         $scope.prefix = 'As your bloodlust settles down, you notice that you are still in';
-        $scope.newView(); 
+        newView(); 
       }
       else{
         location.reload();
@@ -131,11 +133,11 @@ export default function gameController($scope){ //eslint-disable-line no-unused-
     console.log('player clicked run');
     if (rooms[player.room].monster.name != null){
       console.log('player is running away from this monster: '+ rooms[player.room].monster.name);
-      var randomRoom = rooms[player.room][$scope.directions[$scope.getRandomNum()]];
+      var randomRoom = rooms[player.room][$scope.directions[getRandomNum()]];
       if(randomRoom != null){
         player.room = randomRoom;
         console.log(`player is in room ${player.room}`);
-        $scope.newView(); 
+        newView(); 
 
       } else {
         console.log('the was no room in that direction. player ran into a wall and died.');
@@ -152,7 +154,7 @@ export default function gameController($scope){ //eslint-disable-line no-unused-
     console.log('player clicked talk');
     if (rooms[player.room].monster.name != null){
       console.log('player is talking to this monster: '+ rooms[player.room].monster.name);
-      var randomNum = $scope.getRandomNum();
+      var randomNum = getRandomNum();
       if(randomNum === 1){
         alert('woooo you talked to the monster and won!');
       } else{
