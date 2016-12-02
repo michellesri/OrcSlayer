@@ -2,6 +2,7 @@
 <html lang="en" ng-app="orcSlayer">
 <head>
   <meta charset="UTF-8">
+  <link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
   <link rel="stylesheet" href="main.css">
   <title>Orc Slayer</title>
 </head>
@@ -15,7 +16,7 @@
     <button id="play-btn" ng-click="activeTab = { showIntro: false, showInstructions: false, showGame: true };">Play</button>
   </div>
   <div class="tab-content" id="game-page" ng-show="activeTab.showGame" ng-controller="gameController as gc">
-    <div id="game-text">{{roomDescription}}</div>
+    <div id="game-text">{{roomDescription}}{{itemText}}</div>
     <div id="control-panel">
       <span id="action-btns">
         <button id="equip-btn" ng-click="gc.equip();">Equip</button>
@@ -39,6 +40,7 @@
     <button id="play-btn">Play</button>
   </div>
   <div class="static" id="footer">
+    <copy>The Orc Slayers 2016</copy>
   </div>
 
 </body>
