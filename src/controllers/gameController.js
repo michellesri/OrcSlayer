@@ -33,6 +33,7 @@ export default function gameController($scope){ //eslint-disable-line no-unused-
       $scope.fightButton = true;
       $scope.talkButton = true;
       $scope.moveButtons = false;
+      $scope.giveButton = false;
     }
     else {
       console.log('monster dead');
@@ -67,7 +68,7 @@ export default function gameController($scope){ //eslint-disable-line no-unused-
       var entryPrefixes = ['You open the door and enter', 'Passing through the doorway you find yourself in', 'The room you entered is', 'As you close the door you make note of the room around you;'];
       var randomNum = getRandomNum();
       $scope.prefix = entryPrefixes[(randomNum-1)];
-      newView(); 
+      newView();
     }
     else {
       alert('You cannot move in that direction.');
@@ -97,7 +98,7 @@ export default function gameController($scope){ //eslint-disable-line no-unused-
     console.log('I have this equipped: ', player.item.name);
     $scope.playerItemName = player.item.name;
     $scope.playerItemStrength = player.item.strength;
-    newView(); 
+    newView();
   };
 
   this.fight = function(){
@@ -116,7 +117,7 @@ export default function gameController($scope){ //eslint-disable-line no-unused-
         rooms[player.room].monster.item = null;
         console.log('room is now ', rooms[player.room]);
         $scope.prefix = 'As your bloodlust settles down, you notice that you are still in';
-        newView(); 
+        newView();
       }
       else{
         location.reload();
@@ -137,7 +138,7 @@ export default function gameController($scope){ //eslint-disable-line no-unused-
       if(randomRoom != null){
         player.room = randomRoom;
         console.log(`player is in room ${player.room}`);
-        newView(); 
+        newView();
 
       } else {
         console.log('the was no room in that direction. player ran into a wall and died.');
@@ -150,6 +151,37 @@ export default function gameController($scope){ //eslint-disable-line no-unused-
     }
   };
 
+  this.give = function(){
+    console.log('give button being clicked');
+
+    if(player.item.name === 'turkey drumstick'){
+      $scope.orcTalk = 'Orc: young traveler, i am very happy with this gift. please take this thousand year old sword: Excaliborc. may it guide you in your journey.';
+      player.item = {
+        name: 'Excaliborc',
+        strength: 30,
+        description: 'blahblhablha'
+      };
+
+      console.log('player: ', player);
+      $scope.playerItemName = player.item.name;
+      $scope.playerItemStrength = player.item.strength;
+      newView();
+      $scope.prefix = 'the tension in the room is no longer there. ';
+      $scope.roomDescription= 'the room has brightened up. ';
+      $scope.monsterText= 'there is now a happy orc laying down and eating the juicy turkey drumstick';
+
+    } else {
+      if(player.item.name === null){
+        $scope.orcTalk = 'FOOLISH ONE. are you trying to trick me by giving me nothing!?!';
+      } else {
+        alert('the orc mistook your attempt to hand him a gift as an attack with a weapon, jumped up and crushed you with his landing. game over.');
+        location.reload();
+      }
+
+    }
+  };
+
+
   this.talk = function(){
     console.log('player clicked talk');
     if (rooms[player.room].monster.name != null){
@@ -157,14 +189,20 @@ export default function gameController($scope){ //eslint-disable-line no-unused-
       var randomNum = getRandomNum();
       if(randomNum === 1){
         alert('woooo you talked to the monster and won!');
-      } else{
+      } else if(randomNum === 2 || 3 || 4){
+        $scope.orcTalk = 'feeeeeble one, i are orc. what doo youuuu wantt?!?';
+        $scope.giveButton = true;
+
+      }
+
+      else{
         location.reload();
         alert('the monster got mad at the things you said and killed you. game over.');
       }
-      // $scope.gameDescription = 'you are talking';
     }
     else {
       alert('There is nothing in this room to talk to. Are you going crazy?');
     }
   };
+
 }

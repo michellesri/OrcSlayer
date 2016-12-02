@@ -37,7 +37,7 @@ let Three = {
   S:  7,
   W: 2
 };
- 
+
 let Four = {
   description: '',
   item: {name: null, strength: null, text: null},
@@ -161,3 +161,5 @@ let Fifteen = {
 let rooms = [Zero, One, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Eleven, Twelve, Thirteen, Fourteen, Fifteen];
 
 module.exports = rooms;
+
+//sword, turkey drumstick, axe, dagger
