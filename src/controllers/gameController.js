@@ -9,6 +9,7 @@ export default function gameController($scope){ //eslint-disable-line no-unused-
   console.log('player: ', player);
 
   $scope.player=player;
+  $scope.rooms = rooms;
   $scope.roomDescription = rooms[player.room].description;
 
   this.move = function(direction){
