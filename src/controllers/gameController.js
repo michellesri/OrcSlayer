@@ -72,7 +72,7 @@ export default function gameController($scope){ //eslint-disable-line no-unused-
 
   this.run = function(){
     console.log('player clicked run');
-    if (rooms[player.room].monster != null){
+    if (rooms[player.room].monster.name != null){
       console.log('player is running away from this monster: '+ rooms[player.room].monster.name);
       var randomRoom = rooms[player.room][$scope.directions[$scope.getRandomNum()]];
       if(randomRoom != null){
@@ -93,11 +93,11 @@ export default function gameController($scope){ //eslint-disable-line no-unused-
 
   this.talk = function(){
     console.log('player clicked talk');
-    if (rooms[player.room].monster != null){
+    if (rooms[player.room].monster.name != null){
       console.log('player is talking to this monster: '+ rooms[player.room].monster.name);
       var randomNum = $scope.getRandomNum();
       if(randomNum === 1){
-        console.log('woooo you talked to the monster and won!');
+        alert('woooo you talked to the monster and won!');
       } else{
         location.reload();
         alert('the monster got mad at the things you said and killed you. game over.');
