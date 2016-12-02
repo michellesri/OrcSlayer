@@ -10,6 +10,11 @@ export default function gameController($scope){ //eslint-disable-line no-unused-
 
   $scope.player=player;
   $scope.roomDescription = rooms[player.room].description;
+  var directions = ['N', 'E', 'S', 'W'];
+
+  function getRandomNum(){
+    return Math.floor(Math.random() * 4) + 1;
+  }
 
   this.move = function(direction){
     console.log('player moved in this direction', direction);
@@ -48,9 +53,24 @@ export default function gameController($scope){ //eslint-disable-line no-unused-
     }
   };
 
+  this.run = function(){
+    console.log('player clicked run');
+    if (rooms[player.room].monster != null){
+      console.log('player is running away from this monster: '+ rooms[player.room].monster);
+      var randomRoom = rooms[player.room][directions[getRandomNum()]];
+      if(randomRoom != null){
+        player.room = randomRoom;
+        console.log(`player is in room ${player.room}`);
+        $scope.roomDescription = rooms[player.room].description;
 
+      } else {
+        console.log('the was no room in that direction. player ran into a wall and died.');
+        location.reload();
+        alert('there was no room in that direction. player ran into a wall and died. game over.');
+
+      }
+    } else {
+      console.log('There is nothing in this room to run from.');
+    }
+  };
 }
-
-
-
-
