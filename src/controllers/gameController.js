@@ -104,10 +104,10 @@ export default function gameController($scope){ //eslint-disable-line no-unused-
     console.log('player clicked fight');
     if (rooms[player.room].monster.name != null){
       console.log('player is fighting this a(n) '+ rooms[player.room].monster.name+ ' with a(n) '+player.item.name);
-      var randomNum = getRandomNum();
-      var playerStrength = player.item.strength*randomNum;
+      // var randomNum = getRandomNum();
+      // var playerStrength = player.item.strength*randomNum;
       // Cheat code:
-      // playerStrength = 20;
+      var playerStrength = 20;
       console.log('Player Attack is ', playerStrength);
       if (playerStrength >= rooms[player.room].monster.strength){
         alert('Congratulations!  You defeated the '+ rooms[player.room].monster.name+'.');
