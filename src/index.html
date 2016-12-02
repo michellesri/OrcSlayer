@@ -20,16 +20,16 @@
     <div id="game-text">{{prefix}}{{roomDescription}}{{monsterText}}{{itemText}} <br> {{gameDescription}}</div>
     <div id="control-panel">
       <span id="action-btns">
-        <button id="equip-btn" class="game-btn" ng-click="gc.equip();">Equip</button>
-        <button id="fight-btn" class="game-btn" ng-click="gc.fight();">Fight</button>
-        <button id="run-btn" class="game-btn" ng-click="gc.run();">Run</button>
-        <button id="talk-btn" class="game-btn" ng-click="gc.talk();">Talk</button>
+        <button id="equip-btn" class="game-btn" ng-click="gc.equip();" ng-show="equipButton">Equip</button>
+        <button id="fight-btn" class="game-btn" ng-click="gc.fight();" ng-show="fightButton">Fight</button>
+        <button id="run-btn" class="game-btn" ng-click="gc.run();" ng-show="runButton">Run</button>
+        <button id="talk-btn" class="game-btn" ng-click="gc.talk();" ng-show="talkButton">Talk</button>
 
       </span>
       <span id="inventory">
         <p id="inventory-content">Equipped Item: {{playerItemName}}<br>Item Strength: {{playerItemStrength}}</p>
       </span>
-      <span id="direction-ctrl">
+      <span id="direction-ctrl" ng-show="moveButtons">
         <button id="n-btn" class="direction-button" ng-click="gc.move('N')">N</button>
         <button id="e-btn" class="direction-button" ng-click="gc.move('E')">E</button>
         <button id="s-btn" class="direction-button" ng-click="gc.move('S')">S</button>
