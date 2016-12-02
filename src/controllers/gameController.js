@@ -98,7 +98,7 @@ export default function gameController($scope){ //eslint-disable-line no-unused-
         rooms[player.room].item = rooms[player.room].monster.item;
         rooms[player.room].monster.item = null;
         console.log('room is now ', rooms[player.room]);
-        $scope.prefix = 'As your bloodlust settles down, you notice that you as still in';
+        $scope.prefix = 'As your bloodlust settles down, you notice that you are still in';
         $scope.newView(); 
         // rooms[player.room].monster.defeatText = null;
       }

@@ -29,9 +29,9 @@ let roomTwo = {
 };
 
 let roomThree = {
-  description: ' a bare room with a door on the north side.',
+  description: ' a bare room with a ragged indecipherable tapestry on the west wall and doors on the north and south sides.',
   item: {name: null, strength: null, text: null, item: null},
-  monster: {name: 'Orc', strength: 16, alive: true, text: 'A savage orc warrior is standing in a threatening position at the center of the room with an axe in each hand. ', defeatText:'  The newly-dead body of the orc warrior lies face-up on the floor, his eyes open but unseeing.', item:{name: 'sharp axe', strength: 10, text: '  A sharp and savage-looking orcish hand axe lies on the ground.'}},
+  monster: {name: 'Orc', strength: 16, alive: true, text: '  A savage orc warrior is standing in a threatening position at the center of the room with an axe in each hand. ', defeatText:'  The newly-dead body of the orc warrior lies face-up on the floor, his eyes open but unseeing.', item:{name: 'sharp axe', strength: 10, text: '  A sharp and savage-looking orcish hand axe lies on the ground.'}},
   N: 5,
   E: null,
   S: 2,
