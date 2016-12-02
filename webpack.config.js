@@ -1,3 +1,4 @@
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
@@ -9,7 +10,8 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/index.html'
-    })
+    }),
+    new ExtractTextPlugin('main.css')
   ],
   module: {
     preLoaders: [{
@@ -24,6 +26,9 @@ module.exports = {
       query: {
         presets: ['es2015']
       }
+    }, {
+      test:/\.css/,
+      loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
     }]
   }
 };

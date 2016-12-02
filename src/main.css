@@ -1,0 +1,84 @@
+h1 {
+font-family: 'VT323', monospace;
+font-size: 20vh;
+position: static;
+margin: 0px;
+}
+
+body {
+     border: 1vh solid grey;
+}
+
+#header{
+min-height: 30vh;
+color: lawngreen;
+background-color: black;
+}
+
+#footer{
+min-height: 10vh;
+font-family: 'VT323', monospace;
+font-size: 3vh;
+color: lawngreen;
+background-color: black
+}
+
+.tab-content{
+    min-height: 60vh;
+}
+
+#control-panel{
+    border: 1vh solid grey;
+    background-color: sandybrown
+}
+
+span{
+    display: inline-block;
+    border: 1vh solid grey;
+}
+
+
+
+
+/*#n-btn{
+    position: absolute;
+    bottom: 42vh;
+    right: 7vw;
+}
+
+#w-btn{
+    position: absolute;
+    right: 10vw;
+}
+
+#s-btn{
+    position: absolute;
+    right: 7vw;
+}
+
+#e-btn{
+    position: absolute;
+    right: 4vw;
+}*/
+
+#direction-ctrl{
+    float: right;
+}
+
+#n-btn{
+    position: relative;
+    top: 0vh;
+}
+
+#w-btn{
+  float: left;
+}
+
+#s-btn{
+    position: relative;
+    top: 5vh;
+}
+
+#e-btn{
+   float: right;
+}

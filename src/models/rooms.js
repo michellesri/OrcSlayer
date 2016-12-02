@@ -1,6 +1,6 @@
 let roomZero = {
-  description: 'you are in room zero',
-  item: 'turkey drumstick',
+  description: 'You open the door to enter a study with only one door, the one you came from. There are two chairs facing a stone hearth on the North wall of the room.  The fire in the hearth appears to have recently gone out, although nothing but warm ashes remain.',
+  item: {name: 'turkey drumstick', strength: 1, text: '  A delicious-smelling turkey drumstick sits on a plate on one of the chairs.'},
   monster: null,
   N: null,
   E: null,
@@ -9,8 +9,8 @@ let roomZero = {
 };
 
 let roomOne = {
-  description: 'you are in room one',
-  item: null,
+  description: 'You wake up in a dark and foul-smelling dungeon.  The source of the smell is a bloated corpse, decomposing in the Northwest corner of the room.  There are doors on  the North and East sides of the room.',
+  item: {name: null, strength: null, text: null},
   monster: null,
   N: 0,
   E: 2,
@@ -19,8 +19,8 @@ let roomOne = {
 };
 
 let roomTwo = {
-  description: 'you are in room two',
-  item: 'sword',
+  description: 'You enter a room filled with ancienct implements of battle.  Old oxidized axes and swords, long ago rusted to obscure orange shapes line the walls of the chamber.  Old, notched wooden doors are found on the north and west walls.  Several mildewy practice dummies stand halfway erect in the center of the room, leaking straw.',
+  item: {name: 'sword', strength: 5, text: '  A rusty, but functional, iron short sword is sticking out of one of the practice dummies.'},
   monster: null,
   N: 3,
   E: null,
@@ -29,9 +29,9 @@ let roomTwo = {
 };
 
 let roomThree = {
-  description: 'you are in room three',
-  item: null,
-  monster: 'Orc',
+  description: 'As you enter the room you see a savage orc standing in a threatening position with an axe in each hand.  There are no other doors in this room.  With the exception of the orc, you do not notice any other details of the room.',
+  item: {name: null, strength: null, text: null},
+  monster: {name: 'Orc', strength: 8},
   N: null,
   E: null,
   S: 2,

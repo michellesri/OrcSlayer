@@ -1,8 +1,9 @@
 // import rooms from '../models/rooms';
 
 let player = {
+  // life: true,
   room: 1,
-  item: null
+  item: {name: null, strength: null, text: null}
 };
 
 // player.move = function(direction){
