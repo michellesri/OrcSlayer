@@ -10,11 +10,18 @@ export default function gameController($scope){ //eslint-disable-line no-unused-
 
   $scope.player=player;
   $scope.roomDescription = rooms[player.room].description;
-  var directions = ['N', 'E', 'S', 'W'];
+  $scope.directions = ['N', 'E', 'S', 'W'];
 
-  function getRandomNum(){
+  $scope.getRandomNum = function(){
     return Math.floor(Math.random() * 4) + 1;
-  }
+  };
+
+  $scope.playerRoulette = function(){
+    var randomNum = $scope.getRandomNum();
+    if(randomNum === 1){
+      return player.life = false;
+    }
+  };
 
   this.move = function(direction){
     console.log('player moved in this direction', direction);
@@ -57,7 +64,7 @@ export default function gameController($scope){ //eslint-disable-line no-unused-
     console.log('player clicked run');
     if (rooms[player.room].monster != null){
       console.log('player is running away from this monster: '+ rooms[player.room].monster);
-      var randomRoom = rooms[player.room][directions[getRandomNum()]];
+      var randomRoom = rooms[player.room][$scope.directions[$scope.getRandomNum()]];
       if(randomRoom != null){
         player.room = randomRoom;
         console.log(`player is in room ${player.room}`);
@@ -71,6 +78,24 @@ export default function gameController($scope){ //eslint-disable-line no-unused-
       }
     } else {
       console.log('There is nothing in this room to run from.');
+    }
+  };
+
+  this.talk = function(){
+    console.log('player clicked talk');
+    if (rooms[player.room].monster != null){
+      console.log('player is talking to this monster: '+ rooms[player.room].monster);
+      var randomNum = $scope.getRandomNum();
+      if(randomNum === 1){
+        console.log('woooo you talked to the monster and won!');
+      } else{
+        location.reload();
+        alert('the monster got mad at the things you said and killed you. game over.');
+      }
+      // $scope.gameDescription = 'you are talking';
+    }
+    else {
+      alert('There is nothing in this room to talk to. Are you going crazy?');
     }
   };
 }
