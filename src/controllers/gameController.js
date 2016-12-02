@@ -17,13 +17,32 @@ export default function gameController($scope){ //eslint-disable-line no-unused-
     return Math.floor(Math.random() * 4) + 1;
   };
 
+  $scope.newView = function(){
+    if(rooms[player.room].monster.alive){
+      console.log('monster alive');
+      $scope.monsterText= rooms[player.room].monster.text;
+    }
+    else {
+      console.log('monster dead');
+      if(rooms[player.room].monster.defeatText){
+        console.log('monster has defeat Text');
+        $scope.monsterText= rooms[player.room].monster.defeatText;
+        console.log('deafeat text is', rooms[player.room].monster.defeatText);
+      }
+      else{
+        $scope.monsterText= null;
+      }
+    }
+    $scope.roomDescription = rooms[player.room].description;
+    $scope.itemText= rooms[player.room].item.text;
+  };
+
   $scope.playerRoulette = function(){
     var randomNum = $scope.getRandomNum();
     if(randomNum === 1){
       return player.life = false;
     }
   };
-  $scope.itemText= rooms[player.room].item.text;
 
   this.move = function(direction){
     console.log('player moved in this direction', direction);
@@ -34,8 +53,7 @@ export default function gameController($scope){ //eslint-disable-line no-unused-
       alert('You cannot move in that direction.');
     }
     console.log('I am in ', player.room);
-    $scope.roomDescription = rooms[player.room].description;
-    $scope.itemText= rooms[player.room].item.text;
+    $scope.newView(); 
   };
 
   this.equip = function(){
@@ -57,17 +75,37 @@ export default function gameController($scope){ //eslint-disable-line no-unused-
       alert('There is nothing in this room to equip.');
     }
     console.log('I have this equipped: ', player.item.name);
-    $scope.playerItem = player.item.name;
-    $scope.itemText= rooms[player.room].item.text;
+    $scope.playerItemName = player.item.name;
+    $scope.playerItemStrength = player.item.strength;
+    $scope.newView(); 
   };
 
   this.fight = function(){
     console.log('player clicked fight');
     if (rooms[player.room].monster.name != null){
-      console.log('player is fighting this monster: '+ rooms[player.room].monster.name+ ' with a '+player.item.name);
+      console.log('player is fighting this a(n) '+ rooms[player.room].monster.name+ ' with a(n) '+player.item.name);
+      // var randomNum = $scope.getRandomNum();
+      //cheat code added
+      var randomNum = 4;
+      var playerStrength = player.item.strength*randomNum;
+      console.log('Player Attack is ', playerStrength);
+      if (playerStrength >= rooms[player.room].monster.strength){
+        alert('Congratulations!  You defeated the '+ rooms[player.room].monster.name+'.');
+        rooms[player.room].monster.alive = false;
+        rooms[player.room].item = rooms[player.room].monster.item;
+        rooms[player.room].monster.item = null;
+        console.log('room is now ', rooms[player.room]);
+        $scope.newView(); 
+        // rooms[player.room].monster.defeatText = null;
+      }
+      else{
+        location.reload();
+        alert('Alas!  You were killed by the '+ rooms[player.room].monster.name+'.');
+      }
+
     }
     else {
-      alert('There is nothing in this room to fight.');
+      alert('You are getting paranoid, there is nothing in this room to fight.');
     }
   };
 
@@ -79,7 +117,7 @@ export default function gameController($scope){ //eslint-disable-line no-unused-
       if(randomRoom != null){
         player.room = randomRoom;
         console.log(`player is in room ${player.room}`);
-        $scope.roomDescription = rooms[player.room].description;
+        $scope.newView(); 
 
       } else {
         console.log('the was no room in that direction. player ran into a wall and died.');
