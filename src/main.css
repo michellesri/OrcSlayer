@@ -1,0 +1,46 @@
+h1 {
+font-family: 'VT323', monospace
+}
+
+#header{
+font-size: 10vh;
+color: lawngreen;
+background-color: black;
+}
+
+#footer{
+font-family: 'VT323', monospace;
+font-size: 3vh;
+color: lawngreen;
+background-color: black
+}
+
+#control-panel{
+    border: 1vh solid grey;
+    background-color: lemonchiffon
+}
+
+span{
+    display: inline-block
+}
+
+#n-btn{
+    position: absolute;
+    bottom: 42vh;
+    right: 7vw;
+}
+
+#w-btn{
+    position: absolute;
+    right: 4vw;
+}
+
+#s-btn{
+    position: absolute;
+    right: 7vw;
+}
+
+#e-btn{
+    position: absolute;
+    right: 10vw;
+}

@@ -10,6 +10,7 @@ export default function gameController($scope){ //eslint-disable-line no-unused-
 
   $scope.player=player;
   $scope.roomDescription = rooms[player.room].description;
+  $scope.itemText= rooms[player.room].itemText;
 
   this.move = function(direction){
     console.log('player moved in this direction', direction);
@@ -21,6 +22,7 @@ export default function gameController($scope){ //eslint-disable-line no-unused-
     }
     console.log('I am in ', player.room);
     $scope.roomDescription = rooms[player.room].description;
+    $scope.itemText= rooms[player.room].itemText;
   };
 
   this.equip = function(){
@@ -30,12 +32,19 @@ export default function gameController($scope){ //eslint-disable-line no-unused-
       console.log(rooms[player.room].item);
       player.item=rooms[player.room].item;
       rooms[player.room].item=dropped;
+      if (rooms[player.room].item != null){
+        rooms[player.room].itemText = '  A '+dropped+' lies on the ground.';
+      }
+      else{
+        rooms[player.room].itemText = null; 
+      }
     }
     else {
       alert('There is nothing in this room to equip.');
     }
     console.log('I have this equipped: ', player.item);
     $scope.playerItem = player.item;
+    $scope.itemText= rooms[player.room].itemText;
   };
 
   this.fight = function(){
