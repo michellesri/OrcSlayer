@@ -63,7 +63,7 @@ export default function gameController($scope){ //eslint-disable-line no-unused-
 
   this.fight = function(){
     console.log('player clicked fight');
-    if (rooms[player.room].monster != null){
+    if (rooms[player.room].monster.name != null){
       console.log('player is fighting this monster: '+ rooms[player.room].monster.name+ ' with a '+player.item.name);
     }
     else {
