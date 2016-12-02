@@ -8,49 +8,49 @@ export default function gameController($scope){ //eslint-disable-line no-unused-
   console.log('rooms: ' , rooms);
   console.log('player: ', player);
 
-  $scope.player=player;
-  $scope.rooms = rooms;
-  $scope.prefix = 'You wake up in a dungeon with a pounding headache.  As your eyes focus you notice that the room around you,';
-  $scope.roomDescription = rooms[player.room].description;
-  $scope.directions = ['N', 'E', 'S', 'W'];
-  $scope.moveButtons = true;
+  // $scope.player=player;
+  // $scope.rooms = rooms;
+  this.prefix = 'You wake up in a dungeon with a pounding headache.  As your eyes focus you notice that the room around you,';
+  this.roomDescription = rooms[player.room].description;
+  this.directions = ['N', 'E', 'S', 'W'];
+  this.moveButtons = true;
 
   var getRandomNum = function(){
     return Math.floor(Math.random() * 4) + 1;
   };
 
-  var newView = function(){
+  this.newView = function(){
     if(!rooms[player.room].item.name){
-      $scope.equipButton = false;
+      this.equipButton = false;
     }
     else{
-      $scope.equipButton = true;
+      this.equipButton = true;
     }
     if(rooms[player.room].monster.alive){
       console.log('monster alive');
-      $scope.monsterText= rooms[player.room].monster.text;
-      $scope.runButton = true;
-      $scope.fightButton = true;
-      $scope.talkButton = true;
-      $scope.moveButtons = false;
+      this.monsterText= rooms[player.room].monster.text;
+      this.runButton = true;
+      this.fightButton = true;
+      this.talkButton = true;
+      this.moveButtons = false;
     }
     else {
       console.log('monster dead');
-      $scope.runButton = false;
-      $scope.fightButton =false;
-      $scope.talkButton = false;
-      $scope.moveButtons = true;
+      this.runButton = false;
+      this.fightButton =false;
+      this.talkButton = false;
+      this.moveButtons = true;
       if(rooms[player.room].monster.defeatText){
         console.log('monster has defeat Text');
-        $scope.monsterText= rooms[player.room].monster.defeatText;
+        this.monsterText= rooms[player.room].monster.defeatText;
         console.log('deafeat text is', rooms[player.room].monster.defeatText);
       }
       else{
-        $scope.monsterText= null;
+        this.monsterText= null;
       }
     }
-    $scope.roomDescription = rooms[player.room].description;
-    $scope.itemText= rooms[player.room].item.text;
+    this.roomDescription = rooms[player.room].description;
+    this.itemText= rooms[player.room].item.text;
   };
 
   // var playerRoulette = function(){
@@ -66,8 +66,8 @@ export default function gameController($scope){ //eslint-disable-line no-unused-
       player.room = rooms[player.room][direction];
       var entryPrefixes = ['You open the door and enter', 'Passing through the doorway you find yourself in', 'The room you entered is', 'As you close the door you make note of the room around you;'];
       var randomNum = getRandomNum();
-      $scope.prefix = entryPrefixes[(randomNum-1)];
-      newView(); 
+      this.prefix = entryPrefixes[(randomNum-1)];
+      this.newView(); 
     }
     else {
       alert('You cannot move in that direction.');
@@ -95,8 +95,8 @@ export default function gameController($scope){ //eslint-disable-line no-unused-
       alert('There is nothing in this room to equip.');
     }
     console.log('I have this equipped: ', player.item.name);
-    $scope.playerItemName = player.item.name;
-    $scope.playerItemStrength = player.item.strength;
+    this.playerItemName = player.item.name;
+    this.scope.playerItemStrength = player.item.strength;
     newView(); 
   };
 
@@ -115,7 +115,7 @@ export default function gameController($scope){ //eslint-disable-line no-unused-
         rooms[player.room].item = rooms[player.room].monster.item;
         rooms[player.room].monster.item = null;
         console.log('room is now ', rooms[player.room]);
-        $scope.prefix = 'As your bloodlust settles down, you notice that you are still in';
+        this.prefix = 'As your bloodlust settles down, you notice that you are still in';
         newView(); 
       }
       else{
@@ -133,7 +133,7 @@ export default function gameController($scope){ //eslint-disable-line no-unused-
     console.log('player clicked run');
     if (rooms[player.room].monster.name != null){
       console.log('player is running away from this monster: '+ rooms[player.room].monster.name);
-      var randomRoom = rooms[player.room][$scope.directions[getRandomNum()]];
+      var randomRoom = rooms[player.room][this.directions[getRandomNum()]];
       if(randomRoom != null){
         player.room = randomRoom;
         console.log(`player is in room ${player.room}`);
