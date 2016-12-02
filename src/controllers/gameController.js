@@ -10,6 +10,7 @@ export default function gameController($scope){ //eslint-disable-line no-unused-
 
   $scope.player=player;
   $scope.rooms = rooms;
+  $scope.prefix = 'You wake up in a dungeon with a pounding headache.  As your eyes focus you notice that the room around you,';
   $scope.roomDescription = rooms[player.room].description;
   $scope.directions = ['N', 'E', 'S', 'W'];
 
@@ -48,12 +49,16 @@ export default function gameController($scope){ //eslint-disable-line no-unused-
     console.log('player moved in this direction', direction);
     if (rooms[player.room][direction] != null){
       player.room = rooms[player.room][direction];
+      var entryPrefixes = ['You open the door and enter', 'Passing through the doorway you find yourself in', 'The room you entered is', 'As you close the door you make note of the room around you;'];
+      var randomNum = $scope.getRandomNum();
+      $scope.prefix = entryPrefixes[(randomNum-1)];
+      $scope.newView(); 
     }
     else {
       alert('You cannot move in that direction.');
     }
     console.log('I am in ', player.room);
-    $scope.newView(); 
+
   };
 
   this.equip = function(){
@@ -77,16 +82,14 @@ export default function gameController($scope){ //eslint-disable-line no-unused-
     console.log('I have this equipped: ', player.item.name);
     $scope.playerItemName = player.item.name;
     $scope.playerItemStrength = player.item.strength;
-    $scope.newView(); 
+    // $scope.newView(); 
   };
 
   this.fight = function(){
     console.log('player clicked fight');
     if (rooms[player.room].monster.name != null){
       console.log('player is fighting this a(n) '+ rooms[player.room].monster.name+ ' with a(n) '+player.item.name);
-      // var randomNum = $scope.getRandomNum();
-      //cheat code added
-      var randomNum = 4;
+      var randomNum = $scope.getRandomNum();
       var playerStrength = player.item.strength*randomNum;
       console.log('Player Attack is ', playerStrength);
       if (playerStrength >= rooms[player.room].monster.strength){
@@ -95,6 +98,7 @@ export default function gameController($scope){ //eslint-disable-line no-unused-
         rooms[player.room].item = rooms[player.room].monster.item;
         rooms[player.room].monster.item = null;
         console.log('room is now ', rooms[player.room]);
+        $scope.prefix = 'As your bloodlust settles down, you notice that you as still in';
         $scope.newView(); 
         // rooms[player.room].monster.defeatText = null;
       }
