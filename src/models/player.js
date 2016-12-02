@@ -1,6 +1,7 @@
 // import rooms from '../models/rooms';
 
 let player = {
+  // life: true,
   room: 1,
   item: null
 };
