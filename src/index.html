@@ -20,10 +20,10 @@
     <div id="game-text">{{roomDescription}}{{itemText}} <br> {{gameDescription}}</div>
     <div id="control-panel">
       <span id="action-btns">
-        <button id="equip-btn" ng-click="gc.equip();">Equip</button>
-        <button id="fight-btn" ng-click="gc.fight();">Fight</button>
-        <button id="run-btn" ng-click="gc.run();">Run</button>
-        <button id="talk-btn" ng-click="gc.talk();">Talk</button>
+        <button id="equip-btn" class="game-btn" ng-click="gc.equip();">Equip</button>
+        <button id="fight-btn" class="game-btn" ng-click="gc.fight();">Fight</button>
+        <button id="run-btn" class="game-btn" ng-click="gc.run();">Run</button>
+        <button id="talk-btn" class="game-btn" ng-click="gc.talk();">Talk</button>
 
       </span>
       <span id="inventory">
@@ -40,7 +40,7 @@
   <div class="tab-content" id="instruction-page" ng-show="activeTab.showInstructions">
     <h1>Instructions</h1>
     <p>Instructions will go here.</p>
-    <button id="play-btn">Play</button>
+    <button id="play-btn" ng-click="activeTab = { showIntro: false, showInstructions: false, showGame: true };">Play</button>
   </div>
   <div class="static" id="footer">
     <copy>The Orc Slayers 2016</copy>

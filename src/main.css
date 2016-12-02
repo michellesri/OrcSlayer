@@ -27,14 +27,13 @@ background-color: black
     min-height: 60vh;
 }
 
-#control-panel{
+/*#control-panel{
     border: 1vh solid grey;
-    background-color: sandybrown
-}
+}*/
 
 span{
     display: inline-block;
-    border: 1vh solid grey;
+    /*border: 1vh solid grey;*/
 }
 
 
@@ -61,6 +60,25 @@ span{
     right: 4vw;
 }*/
 
+button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-family: 'VT323', monospace;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+button:hover{
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+
+}
+
 #direction-ctrl{
     float: right;
 }
@@ -81,4 +99,16 @@ span{
 
 #e-btn{
    float: right;
+}
+
+#game-text {
+  text-indent: 50px;
+  padding: 10px 0 20px 0;
+  font-weight: bold;
+  font-size: 25px;
+  width: 100%;
+}
+
+.game-btn, .direction-button{
+  background-color: #c91c1c;
 }
