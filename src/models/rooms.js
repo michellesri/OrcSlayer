@@ -49,9 +49,9 @@ let Four = {
 };
 
 let Five = {
-  description: '',
+  description: ' a bright entryway with doors on all four sides.  Dusty light streams down from the stained glass dome, illuminating a spinning wheel sitting on a large intricate carpet.  ',
   item: {name: null, strength: null, text: null},
-  monster: {name: null, strength: null, alive: null, text: null, defeat:null, item:{name: null, strength: null, text: null}},
+  monster: {name: 'Maiden', strength: 8, alive: true, text: '  A beautiful maiden is standing in the center of the room.  She backs away from you with a terrified expression.', defeat: '  The formerly beautiful dead maiden lays face down on the blood-stained carpet.', item:{name: 'pearl-handled dagger', strength: 8, text: '  A glittering dagger with a large pearl on the pommel lays on the carpet several feet from the dead maiden.'}},
   N: 1,
   E: 6,
   S:  9,
@@ -91,7 +91,7 @@ let Eight = {
 let Nine = {
   description: ' a bare room with a ragged indecipherable tapestry on the west wall and doors on the north and south sides.',
   item: {name: null, strength: null, text: null},
-  monster: {name: 'Orc', strength: 16, alive: true, text: '  A savage orc warrior is standing in a threatening position at the center of the room with an axe in each hand. ', defeatText:'  The newly-dead body of the orc warrior lies face-up on the floor, his eyes open but unseeing.', item:{name: 'sharp axe', strength: 10, text: '  A sharp and savage-looking orcish hand axe lies on the ground.'}},
+  monster: {name: 'Orc', strength: 16, alive: true, text: '  A savage orc warrior is standing in a threatening position at the center of the room with an axe in each hand. ', defeatText:'  The newly-dead body of the orc warrior lies face-up on the floor, his eyes open but unseeing.', item:{name: 'sharp axe', strength: 10, text: '  A sharp and savage-looking orcish hand axe lies besides the orcs\'s outstretched hand.'}},
   N: 5,
   E: null,
   S: 13,
@@ -129,7 +129,7 @@ let Twelve = {
 };
 
 let Thirteen = {
-  description: ' a room filled with ancienct implements of battle.  Old oxidized axes and swords, long ago rusted to obscure orange shapes line the walls of the chamber.  Old, notched wooden doors are found on the north and west walls.  Several mildewy practice dummies stand halfway erect in the center of the room, leaking straw.',
+  description: ' a room filled with ancient implements of battle.  Old oxidized axes and swords, long ago rusted to obscure orange shapes line the walls of the chamber.  Old, notched wooden doors are found on the north and west walls.  Several mildewy practice dummies stand halfway erect in the center of the room, leaking straw.',
   item: {name: 'rusty sword', strength: 5, text: '  A rusty, but functional, iron short sword is sticking out of one of the practice dummies.'},
   monster: {name: null, strength: null, alive: null, text: null, defeat:null, item:{name: null, strength: null, text: null}},
   N: 9,
