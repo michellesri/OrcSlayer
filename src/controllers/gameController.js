@@ -97,7 +97,7 @@ export default function gameController($scope){ //eslint-disable-line no-unused-
     console.log('I have this equipped: ', player.item.name);
     this.playerItemName = player.item.name;
     this.scope.playerItemStrength = player.item.strength;
-    newView(); 
+    this.newView(); 
   };
 
   this.fight = function(){
@@ -116,7 +116,7 @@ export default function gameController($scope){ //eslint-disable-line no-unused-
         rooms[player.room].monster.item = null;
         console.log('room is now ', rooms[player.room]);
         this.prefix = 'As your bloodlust settles down, you notice that you are still in';
-        newView(); 
+        this.newView(); 
       }
       else{
         location.reload();
@@ -137,7 +137,7 @@ export default function gameController($scope){ //eslint-disable-line no-unused-
       if(randomRoom != null){
         player.room = randomRoom;
         console.log(`player is in room ${player.room}`);
-        newView(); 
+        this.newView(); 
 
       } else {
         console.log('the was no room in that direction. player ran into a wall and died.');
