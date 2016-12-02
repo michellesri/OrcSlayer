@@ -17,13 +17,14 @@
   </div>
   <div class="tab-content" id="game-page" ng-show="activeTab.showGame" ng-controller="gameController as gc">
 
-    <div id="game-text">{{gc.prefix}}{{gc.roomDescription}}{{gc.monsterText}}{{gc.itemText}} <br></div>
+    <div id="game-text">{{gc.prefix}}{{gc.roomDescription}}{{gc.monsterText}}{{gc.itemText}} <br> {{gc.orcTalk}}</div>
     <div id="control-panel">
       <span id="action-btns">
         <button id="equip-btn" class="game-btn" ng-click="gc.equip();" ng-show="gc.equipButton">Equip</button>
         <button id="fight-btn" class="game-btn" ng-click="gc.fight();" ng-show="gc.fightButton">Fight</button>
         <button id="run-btn" class="game-btn" ng-click="gc.run();" ng-show="gc.runButton">Run</button>
         <button id="talk-btn" class="game-btn" ng-click="gc.talk();" ng-show="gc.talkButton">Talk</button>
+        <button id="give-btn" class="game-btn" ng-click="gc.give();" ng-show="gc.giveButton">Give</button>
 
       </span>
       <span id="inventory">
