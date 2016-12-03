@@ -31,10 +31,10 @@
         <p id="inventory-content">Equipped Item: {{gc.playerItemName}}<br>Item Strength: {{gc.playerItemStrength}}</p>
       </span>
       <span id="direction-ctrl" ng-show="gc.moveButtons">
-        <button id="n-btn" class="direction-button" ng-click="gc.move('N')">N</button>
-        <button id="e-btn" class="direction-button" ng-click="gc.move('E')">E</button>
-        <button id="s-btn" class="direction-button" ng-click="gc.move('S')">S</button>
-        <button id="w-btn" class="direction-button" ng-click="gc.move('W')">W</button>
+        <button id="n-btn" class="direction-button" ng-click="gc.move('N')">North</button>
+        <button id="e-btn" class="direction-button" ng-click="gc.move('E')">East</button>
+        <button id="s-btn" class="direction-button" ng-click="gc.move('S')">South</button>
+        <button id="w-btn" class="direction-button" ng-click="gc.move('W')">West</button>
       </span>
     </div>
   </div>
@@ -44,7 +44,7 @@
     <button id="play-btn" ng-click="activeTab = { showIntro: false, showInstructions: false, showGame: true };">Play</button>
   </div>
   <div class="static" id="footer">
-    <copy>The Orc Slayers 2016</copy>
+    <copy>The Orc Slayers 2016 <br> Mark Greenwood, Michelle Sri, Mugsy Carter</copy>
   </div>
 
 </body>
