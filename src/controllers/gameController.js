@@ -18,6 +18,7 @@ export default function gameController($scope){ //eslint-disable-line no-unused-
   };
 
   this.newView = function(){
+    this.talking=null;
     if(!rooms[player.room].item.name){
       this.equipButton = false;
     }
@@ -40,10 +41,10 @@ export default function gameController($scope){ //eslint-disable-line no-unused-
       this.fightButton =false;
       this.talkButton = false;
       this.moveButtons = true;
-      if(rooms[player.room].monster.defeatText){
+      if(rooms[player.room].monster.defeat){
         console.log('monster has defeat Text');
-        this.monsterText= rooms[player.room].monster.defeatText;
-        console.log('deafeat text is', rooms[player.room].monster.defeatText);
+        this.monsterText= rooms[player.room].monster.defeat;
+        console.log('deafeat text is', rooms[player.room].monster.defeat);
       }
       else{
         this.monsterText= null;
@@ -116,8 +117,6 @@ export default function gameController($scope){ //eslint-disable-line no-unused-
         rooms[player.room].monster.alive = false;
         rooms[player.room].item = rooms[player.room].monster.item;
         rooms[player.room].monster.item = null;
-        console.log('room is now ', rooms[player.room]);
-
         this.prefix = 'As your bloodlust settles down, you notice that you are still in';
         this.newView();
       }
@@ -156,29 +155,34 @@ export default function gameController($scope){ //eslint-disable-line no-unused-
     console.log('give button being clicked');
 
     if(player.item.name === 'turkey drumstick'){
-      this.orcTalk = 'Orc: young traveler, i am very happy with this gift. please take this thousand year old sword: Excaliborc. may it guide you in your journey.';
+    
       player.item = {
         name: 'Excaliborc',
         strength: 30,
         description: 'blahblhablha'
       };
-
-      console.log('player: ', player);
       this.playerItemName = player.item.name;
       this.playerItemStrength = player.item.strength;
-      this.newView();
-      this.prefix = 'the tension in the room is no longer there. ';
-      this.roomDescription= 'the room has brightened up. ';
-      this.monsterText= 'there is now a happy orc laying down and eating the juicy turkey drumstick';
-
+      this.prefix = 'The tension in the room is no longer there. ';
+      rooms[player.room].description = ' a now, much-happier scence; ';
+      rooms[player.room].monster.defeat= 'there is now a happy orc laying down and eating the juicy turkey drumstick';
+      rooms[player.room].monster.alive = false;
+      this.roomDescription = '';
+      this.monsterText ='  The hungry orc is touched by your generous gift of food.';
+      this.talking = 'Orc: young traveler, i am very happy with this gift. please take this thousand year old sword: Excaliborc. may it guide you in your journey.';
+      this.runButton = false;
+      this.fightButton =false;
+      this.talkButton = false;
+      this.moveButtons = true;
+      this.giveButton = false;
     } else {
       if(player.item.name === null){
-        this.orcTalk = 'FOOLISH ONE. are you trying to trick me by giving me nothing!?!';
+        this.talk = 'FOOLISH ONE. are you trying to trick me by giving me nothing!?!';
       } else {
         alert('the orc mistook your attempt to hand him a gift as an attack with a weapon, jumped up and crushed you with his landing. game over.');
-        location.reload();
+     
       }
-
+      location.reload();
     }
   };
 
@@ -191,7 +195,7 @@ export default function gameController($scope){ //eslint-disable-line no-unused-
       if(randomNum === 1){
         alert('woooo you talked to the monster and won!');
       } else if(randomNum === 2 || 3 || 4){
-        this.orcTalk = 'feeeeeble one, i are orc. what doo youuuu wantt?!?';
+        this.talking = 'feeeeeble one, i are orc. what doo youuuu wantt?!?';
         this.giveButton = true;
 
       }

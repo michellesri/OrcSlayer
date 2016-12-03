@@ -17,7 +17,7 @@
   </div>
   <div class="tab-content" id="game-page" ng-show="activeTab.showGame" ng-controller="gameController as gc">
 
-    <div id="game-text">{{gc.prefix}}{{gc.roomDescription}}{{gc.monsterText}}{{gc.itemText}} <br> {{gc.orcTalk}}</div>
+    <div id="game-text">{{gc.prefix}}{{gc.roomDescription}}{{gc.monsterText}}{{gc.itemText}} <br> {{gc.talking}}</div>
     <div id="control-panel">
       <span id="action-btns">
         <button id="equip-btn" class="game-btn" ng-click="gc.equip();" ng-show="gc.equipButton">Equip</button>
