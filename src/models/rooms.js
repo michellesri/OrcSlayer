@@ -90,7 +90,7 @@ let Eight = {
 let Nine = {
   description: ' a bare room with a ragged indecipherable tapestry on the west wall and doors on the north and south sides.',
   item: {name: null, strength: null, text: null},
-  monster: {name: 'Orc', strength: 16, alive: true, text: '  A savage orc warrior is standing in a threatening position at the center of the room with an axe in each hand. ', defeat:'  The newly-dead body of the orc warrior lies face-up on the floor, his eyes open but unseeing.', response:'Feeeeeble one, i are orc. I are too hungry to talk to you! What doo youuuu wantt?!?', wants:'turkey drumstick.', item:{name: 'sharp axe', strength: 10, text: '  A sharp and savage-looking orcish hand axe lies besides the orcs\'s outstretched hand.'}},
+  monster: {name: 'Orc', strength: 16, alive: true, text: '  A savage orc warrior is standing in a threatening position at the center of the room with an axe in each hand. ', defeat:'  The newly-dead body of the orc warrior lies face-up on the floor, his eyes open but unseeing.', response:'Feeeeeble one, i are orc. I are too hungry to talk to you! What doo youuuu wantt?!?', wants:'turkey drumstick', item:{name: 'sharp axe', strength: 10, text: '  A sharp and savage-looking orcish hand axe lies besides the orcs\'s outstretched hand.'}},
   N: 5,
   E: null,
   S: 13,

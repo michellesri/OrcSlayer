@@ -19,47 +19,38 @@ export default function gameController($scope){ //eslint-disable-line no-unused-
 
   this.newView = function(){
     this.talking=null;
-    if(!rooms[player.room].item.name){
-      this.equipButton = false;
-    }
-    else{
-      this.equipButton = true;
-    }
-    if(rooms[player.room].monster.alive){
-      console.log('monster alive');
+    this.equipButton = rooms[player.room].item.name != null; //if item is != null, equipButton is true.
 
+    let isAlive = rooms[player.room].monster.alive === true;
+    this.runButton = isAlive;
+    this.fightButton = isAlive;
+    this.talkButton = isAlive;
+    this.moveButtons = !isAlive;
+    this.giveButton = false;
+
+    this.roomDescription = rooms[player.room].description;
+    this.itemText= rooms[player.room].item.text;
+
+    if(isAlive){
+
+      console.log('monster alive');
       this.monsterText= rooms[player.room].monster.text;
-      this.runButton = true;
-      this.fightButton = true;
-      this.talkButton = true;
-      this.moveButtons = false;
-      this.giveButton = false;
+
+
     }
     else {
       console.log('monster dead');
-      this.runButton = false;
-      this.fightButton =false;
-      this.talkButton = false;
-      this.moveButtons = true;
       if(rooms[player.room].monster.defeat){
         console.log('monster has defeat Text');
         this.monsterText= rooms[player.room].monster.defeat;
         console.log('deafeat text is', rooms[player.room].monster.defeat);
-      }
-      else{
+      } else {
         this.monsterText= null;
       }
     }
-    this.roomDescription = rooms[player.room].description;
-    this.itemText= rooms[player.room].item.text;
+
   };
 
-  // var playerRoulette = function(){
-  //   var randomNum = getRandomNum();
-  //   if(randomNum === 1){
-  //     return player.life = false;
-  //   }
-  // };
 
   this.move = function(direction){
     console.log('player moved in this direction', direction);
@@ -81,21 +72,17 @@ export default function gameController($scope){ //eslint-disable-line no-unused-
   this.equip = function(){
     var dropped = player.item;
     console.log('player clicked equip item');
-    if (rooms[player.room].item.name != null){
-      console.log('something in the room');
-      console.log(rooms[player.room].item);
-      player.item=rooms[player.room].item;
-      rooms[player.room].item=dropped;
-      if (rooms[player.room].item.name != null){
-        rooms[player.room].item.text = '  A '+dropped.name+' lies on the ground.';
-      }
-      else{
-        rooms[player.room].item = dropped;
-      }
+    console.log('something in the room');
+    console.log(rooms[player.room].item);
+    player.item=rooms[player.room].item;
+    rooms[player.room].item=dropped;
+    if (dropped.name != null){
+      rooms[player.room].item.text = '  A '+dropped.name+' lies on the ground.';
     }
-    else {
-      alert('There is nothing in this room to equip.');
+    else{
+      rooms[player.room].item = dropped;
     }
+
     console.log('I have this equipped: ', player.item.name);
 
     this.playerItemName = player.item.name;
@@ -105,83 +92,84 @@ export default function gameController($scope){ //eslint-disable-line no-unused-
 
   this.fight = function(){
     console.log('player clicked fight');
-    if (rooms[player.room].monster.name != null){
-      console.log('player is fighting this a(n) '+ rooms[player.room].monster.name+ ' with a(n) '+player.item.name);
+
+    let playerRoom = player.room;
+    let monster = rooms[playerRoom].monster;
+    console.log('player is fighting this a(n) '+ monster.name+ ' with a(n) '+player.item.name);
       // var randomNum = getRandomNum();
       // var playerStrength = player.item.strength*randomNum;
       // Cheat code:
-      var playerStrength = 100;
-      console.log('Player Attack is ', playerStrength);
-      if (playerStrength >= rooms[player.room].monster.strength){
-        alert('Congratulations!  You defeated the '+ rooms[player.room].monster.name+'.');
-        rooms[player.room].monster.alive = false;
-        rooms[player.room].item = rooms[player.room].monster.item;
-        rooms[player.room].monster.item = null;
-        this.prefix = 'As your bloodlust settles down, you notice that you are still in';
-        this.newView();
-      }
-      else{
-        location.reload();
-        alert('Alas!  You were killed by the '+ rooms[player.room].monster.name+'.');
-      }
+    var playerStrength = 100;
+    console.log('Player Attack is ', playerStrength);
+    if (playerStrength >= monster.strength){
+      alert('Congratulations!  You defeated the '+ monster.name+'.');
+      monster.alive = false;
+      rooms[playerRoom].item = monster.item; //TODO: consider what happens when there's already an item in the room.
+      monster.item = null;
+      this.prefix = 'As your bloodlust settles down, you notice that you are still in';
+      this.newView();
+    }
+    else{
+      location.reload();
+      alert('Alas!  You were killed by the '+ monster.name+'.');
+    }
 
-    }
-    else {
-      alert('You are getting paranoid, there is nothing in this room to fight.');
-    }
   };
 
   this.run = function(){
-    console.log('player clicked run');
-    if (rooms[player.room].monster.name != null){
-      console.log('player is running away from this monster: '+ rooms[player.room].monster.name);
-      var randomRoom = rooms[player.room][this.directions[getRandomNum()]];
-      if(randomRoom != null){
-        player.room = randomRoom;
-        console.log(`player is in room ${player.room}`);
-        this.newView();
-      } else {
-        console.log('the was no room in that direction. player ran into a wall and died.');
-        location.reload();
-        alert('there was no room in that direction. player ran into a wall and died. game over.');
 
-      }
+    let playerRoom = player.room;
+    let monster = rooms[playerRoom].monster;
+    console.log('player clicked run');
+    console.log('player is running away from this monster: '+ monster.name);
+    var randomRoom = rooms[playerRoom][this.directions[getRandomNum()]];
+    if(randomRoom != null){
+      playerRoom = randomRoom;
+      console.log(`player is in room ${playerRoom}`);
+      this.newView();
     } else {
-      console.log('There is nothing in this room to run from.');
+      console.log('the was no room in that direction. player ran into a wall and died.');
+      location.reload();
+      alert('there was no room in that direction. player ran into a wall and died. game over.');
+
     }
+
   };
 
   this.give = function(){
     console.log('give button being clicked');
 
-    if(player.item.name === rooms[player.room].monster.wants){
-      if (rooms[player.room].monster.name === 'orc'){
-        player.item = {
+    let playerRoom = player.room;
+    let monster = rooms[playerRoom].monster;
+
+    let doesOrcWantItem = player.item.name === monster.wants && monster.name === 'Orc';
+
+    if(doesOrcWantItem){
+      player.item = {
         name: 'Excaliborc',
         strength: 30,
         description: 'blahblhablha'
       };
-        this.playerItemName = player.item.name;
-        this.playerItemStrength = player.item.strength;
-        this.prefix = 'The tension in the room is no longer there. ';
-        rooms[player.room].description = ' a now, much-happier scence; ';
-        rooms[player.room].monster.defeat= 'there is now a happy orc laying down and eating the juicy turkey drumstick';
-        rooms[player.room].monster.alive = false;
-        this.roomDescription = '';
-        this.monsterText ='  The hungry orc is touched by your generous gift of food.';
-        this.talking = 'Orc: young traveler, i am very happy with this gift. please take this thousand year old sword: Excaliborc. may it guide you in your journey.';
-        this.runButton = false;
-        this.fightButton =false;
-        this.talkButton = false;
-        this.moveButtons = true;
-        this.giveButton = false;
-      }
+      this.playerItemName = player.item.name;
+      this.playerItemStrength = player.item.strength;
+      this.prefix = 'The tension in the room is no longer there. ';
+      rooms[playerRoom].description = ' a now, much-happier scene; ';
+      rooms[playerRoom].monster.defeat= 'there is now a happy orc laying down and eating the juicy turkey drumstick';
+      rooms[playerRoom].monster.alive = false;
+      this.roomDescription = '';
+      this.monsterText ='  The hungry orc is touched by your generous gift of food.';
+      this.talking = 'Orc: young traveler, i am very happy with this gift. please take this thousand year old sword: Excaliborc. may it guide you in your journey.';
+      this.runButton = false;
+      this.fightButton =false;
+      this.talkButton = false;
+      this.moveButtons = true;
+      this.giveButton = false;
     } else {
       if(player.item.name === null){
         this.talk = 'FOOLISH ONE. are you trying to trick me by giving me nothing!?!';
       } else {
         alert('the orc mistook your attempt to hand him a gift as an attack with a weapon, jumped up and crushed you with his landing. game over.');
-     
+
       }
       location.reload();
     }
@@ -189,20 +177,18 @@ export default function gameController($scope){ //eslint-disable-line no-unused-
 
 
   this.talk = function(){
+
+    let monsterName = rooms[player.room].monster.name;
+    let monsterResponse = rooms[player.room].monster.response;
     console.log('player clicked talk');
-    if (rooms[player.room].monster.name != null){
-      console.log('player is talking to this monster: '+ rooms[player.room].monster.name);
-      if(rooms[player.room].monster.response === null){
-        alert(rooms[player.room].monster.name+ ' is NOT in a talking mood!');
-        this.fight();
-      }
-      else{
-        this.talking = rooms[player.room].monster.response;
-        this.giveButton = true;
-      }
+    console.log('player is talking to this monster: '+ monsterName);
+    if(monsterResponse === null){
+      alert(monsterName+ ' is NOT in a talking mood!');
+      this.fight();
     }
-    else {
-      alert('There is nothing in this room to talk to. Are you going crazy?');
+    else{
+      this.talking = monsterResponse;
+      this.giveButton = true;
     }
   };
 
