@@ -60,7 +60,7 @@ let Five = {
 let Six = {
   description: '  a large room, with only one door.  The floor is covered in straw and huge piles of dung and ',
   item: {name: null, strength: null, text: null},
-  monster: {name: 'elephant', strength: 35, alive: true, text: ' a huge bull elephant!', defeat: '  the remains of the majestic creature lie on the ground.  You feel deeply ashamed.  There is nothing work taking.  Too late do you realize this wasn not the best way to acknowledge the elephant in the room.', item:{name: null, strength: null, text: null}},
+  monster: {name: 'elephant', strength: 35, alive: true, text: ' a huge bull elephant!', response: 'I\'m the elephant in the room', defeat: '  the remains of the majestic creature lie on the ground.  You feel deeply ashamed.  There is nothing work taking.  Too late do you realize this was not the best way to acknowledge the elephant in the room.', item:{name: null, strength: null, text: null}},
   N: null,
   E: null,
   S:  null,

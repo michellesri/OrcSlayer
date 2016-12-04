@@ -164,8 +164,9 @@ export default function gameController($scope){ //eslint-disable-line no-unused-
       this.talkButton = false;
       this.moveButtons = true;
       this.giveButton = false;
+
     } else {
-      if(player.item.name === null){
+      if(player.item.name === null) {
         this.talk = 'FOOLISH ONE. are you trying to trick me by giving me nothing!?!';
       } else {
         alert('the orc mistook your attempt to hand him a gift as an attack with a weapon, jumped up and crushed you with his landing. game over.');
