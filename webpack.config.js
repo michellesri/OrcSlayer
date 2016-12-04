@@ -1,5 +1,6 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
 
 module.exports = {
   entry: './src/orcSlayer.js',
@@ -21,13 +22,17 @@ module.exports = {
     }],
     loaders: [{
       test: /\.js$/,
+      include: [
+        path.join(__dirname, 'src'),
+        path.join(__dirname, 'test')
+      ],
       exclude: /node_modules/,
       loader: 'babel-loader',
       query: {
         presets: ['es2015']
       }
     }, {
-      test:/\.css/,
+      test: /\.css/,
       loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
     }]
   }

@@ -1,13 +1,17 @@
+// const fs = require('fs');
 gameController.$inject = ['$scope'];
 
-import player from '../models/player';
+import Player from '../models/player';
 import rooms from '../models/rooms';
 
 export default function gameController($scope){ //eslint-disable-line no-unused-vars
-  console.log('in gameController');
-  console.log('rooms: ' , rooms);
-  console.log('player: ', player);
+  // console.log('in gameController');
+  // console.log('rooms: ' , rooms);
+  // console.log('player: ', player);
 
+  const player = new Player(1);
+  // const rooms = JSON.parse(fs.readSyncFile('../rooms.json'));
+  
   this.prefix = 'You wake up in a dungeon with a pounding headache.  As your eyes focus you notice that the room around you,';
   this.roomDescription = rooms[player.room].description;
   this.directions = ['N', 'E', 'S', 'W'];
@@ -55,7 +59,9 @@ export default function gameController($scope){ //eslint-disable-line no-unused-
   this.move = function(direction){
     console.log('player moved in this direction', direction);
     if (rooms[player.room][direction] != null){
+      console.log('Player is moving from room ', player.room);
       player.room = rooms[player.room][direction];
+      console.log(' into ', player.room);
       var entryPrefixes = ['You open the door and enter', 'Passing through the doorway you find yourself in', 'The room you entered is', 'As you close the door you make note of the room around you;'];
       var randomNum = getRandomNum();
 
