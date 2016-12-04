@@ -153,14 +153,17 @@ export default function gameController($scope){ //eslint-disable-line no-unused-
 
   this.give = function(){
     console.log('give button being clicked');
-
-    if(player.item.name === rooms[player.room].monster.wants){
-      if (rooms[player.room].monster.name === 'orc'){
+    console.log('player.item.name ', player.item.name);
+    console.log('rooms[player.room].monster.wants ', rooms[player.room].monster.wants);
+    console.log('is it true? ', player.item.name === rooms[player.room].monster.wants);
+    if(player.item.name === rooms[player.room].monster.wants) {
+      console.log('I\'m giving the Orc the thing I have');
+      if (rooms[player.room].monster.name === 'Orc') {
         player.item = {
-        name: 'Excaliborc',
-        strength: 30,
-        description: 'blahblhablha'
-      };
+          name: 'Excaliborc',
+          strength: 30,
+          description: 'blahblhablha'
+        };
         this.playerItemName = player.item.name;
         this.playerItemStrength = player.item.strength;
         this.prefix = 'The tension in the room is no longer there. ';
@@ -177,7 +180,7 @@ export default function gameController($scope){ //eslint-disable-line no-unused-
         this.giveButton = false;
       }
     } else {
-      if(player.item.name === null){
+      if(player.item.name === null) {
         this.talk = 'FOOLISH ONE. are you trying to trick me by giving me nothing!?!';
       } else {
         alert('the orc mistook your attempt to hand him a gift as an attack with a weapon, jumped up and crushed you with his landing. game over.');
