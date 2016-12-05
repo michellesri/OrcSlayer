@@ -1,11 +1,11 @@
 import Player from '../models/player';
-import GameSpace from '../models/rooms';
+//import GameSpace from '../models/rooms';
 
-//gameController.$inject = ['Player', 'GameSpace'];
-export default function gameController(/*player, map*/) { //eslint-disable-line no-unused-vars
+gameController.$inject = ['GameSpace'];
+export default function gameController(map) { //eslint-disable-line no-unused-vars
 
   const player = new Player(12);
-  const map = new GameSpace();
+  //const map = new GameSpace();
   
   this.prefix = 'You wake up in a dungeon with a pounding headache.  As your eyes focus you notice that the room around you,';
   this.roomDescription = map.rooms[player.room].description;
