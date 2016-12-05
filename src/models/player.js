@@ -8,9 +8,13 @@
 // module.exports = player;
 
 export default class Player {
-  constructor (room) {
+  constructor () {
     this.life = 20;
-    this.room = room;
+    this.room = 0;
     this.item = { name: null, strength: null, text: null };
+  }
+
+  setLocation(loc) {
+    this.room = loc;
   }
 }
