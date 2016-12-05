@@ -5,6 +5,13 @@ h1 {
   margin: 0px;
 }
 
+h2 {
+  font-family: 'VT323', monospace;
+  font-size: 12vh;
+  position: static;
+  margin: 0px;
+}
+
 body {
    border: 1vh solid grey;
    background-color: lightgrey;

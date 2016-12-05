@@ -15,7 +15,7 @@ let Zero = new Room(
       1,
       '  A flask containing a clear potion, or water, is sticking out of the dead alchemists\'s pocket.'
     ),
-    ''
+    null
   ),
   null,
   1,
@@ -46,7 +46,7 @@ let Two = new Room(
     '  A huge, ferocious troll stands in the back of the room wielding a giant warhammer, terryfying expression on his (her?) face.',
     ' The huge body of the troll lies across the anvil in the center of the room.  His hammer is too big for you to carry.',
     null,
-    ''
+    null
   ),
   null,
   3,
@@ -67,7 +67,7 @@ let Three = new Room(
       20,
       ' The knights deadly-looking long sword lies on the ground next to his body.'
     ),
-    ''
+    null
   ),
   null,
   null,
@@ -93,13 +93,13 @@ let Five = new Room(
     8,
     '  A beautiful maiden is standing in the center of the room.  She backs away from you with a terrified expression.',
     '  The formerly beautiful dead maiden lays face down on the blood-stained carpet.',
-    '',
+    null,
     new Item(
       'pearl-handled dagger',
       8,
       '  A glittering dagger with a large pearl on the pommel lays on the carpet several feet from the dead maiden.'
     ),
-    ''
+    null
   ),
   1,
   6,
@@ -117,7 +117,7 @@ let Six = new Room(
     '  the remains of the majestic creature lie on the ground.  You feel deeply ashamed.  There is nothing work taking.  Too late do you realize this was not the best way to acknowledge the elephant in the room.',
     'I\'m the elephant in the room',
     null,
-    ''
+    null
   ),
   null,
   null,
@@ -172,6 +172,7 @@ let Nine = new Room(
 );
 
 let Ten = new Room(
+
   'you are going deeper and deeper into the dungeon. you see chains on the wall and hear the sound of a mouse run by. each step you take creates sounds of bones being crushed. there are doors to your East and South.',
   null,
   null,
@@ -229,6 +230,7 @@ let Thirteen = new Room(
 
 let Fourteen = new Room(
   ' : this room seems different than the other rooms. the ceiling is much higher and the room is well decorated with royal garments. a chandlier even hangs from the ceiling. you step a bit more into a room and a large three headed white dragon with green eyes swoops down. the ground shakes and you struggle to keep your balance.',
+
   null,
   new Monster(
     'King Dragoone',

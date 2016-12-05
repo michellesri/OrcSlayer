@@ -10,6 +10,7 @@
 export default class Player {
   constructor () {
     this.life = 20;
+    this.progress =[12];
     this.room = 0;
     this.item = { name: null, strength: null, text: null };
   }
