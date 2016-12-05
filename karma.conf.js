@@ -13,9 +13,9 @@ module.exports = function(config) {
     webpack: webpackConfig,
     preprocessors: {
       './src/orcSlayer.js': [ 'webpack' ],
-      './test/**/*.js': [ 'babel' ]
+      './test/**/*.js': [ 'webpack' ]
     },
-    browsers: [ 'Chrome', 'Safari' ],
+    browsers: [ 'Chrome' ], //, 'Safari' ],
     reporters: [ 'spec' ],
     port: 9876,
     colors: true,

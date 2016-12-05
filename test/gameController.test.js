@@ -1,7 +1,9 @@
 /* globals angular, chai */
 const { assert } = chai;
+import Player from '../src/models/player';
+import Room from '../src/models/room';
 
-describe( 'gameController', () => {
+describe.skip ( 'gameController', () => {
 
   beforeEach(angular.mock.module('controllers'));
 
@@ -38,6 +40,47 @@ describe( 'gameController', () => {
     gc.equip();
     // console.log('>>> After equip player ', $scope.player, ' room ', $scope.rooms);
     assert.equal($scope.player.item.name, 'sword');    
+  });
+
+});
+
+describe ('gameController test2', () => {
+
+  // beforeEach(module('orcSlayer'));
+
+  // let ctrl;
+
+  // beforeEach(inject(function($controller) {
+  //   ctrl = $controller('gameController');
+  // }));
+
+  beforeEach(angular.mock.module('controllers'));
+
+  let $controller, $scope, gc, player;
+
+  beforeEach(angular.mock.inject(function($rootScope, _$controller_) {
+    $scope = $rootScope.$new();
+    $controller = _$controller_;
+    gc = $controller('gameController', { $scope });
+  }));
+
+  it ('should move player from room to room', () => {
+    // create two rooms; put player in 1 and move to 2
+    $scope.rooms = [
+      new Room('Room 0', null, null, 1, null, null, null),
+      new Room('Room 1', null, null, null, null, 0, null)
+    ];
+    player = new Player(0);
+    gc.move('N');
+    assert.equal(player.room, 1);
+  });
+
+  it ('should equip player with item', () => {
+    assert(false);
+  });
+
+  it ('should leave item in room when player drops it', () => {
+    assert(false);
   });
 
 });

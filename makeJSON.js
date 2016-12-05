@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 let Zero = {
   description: '  a pristine alchemy lab, full of glassware coursing with solutions of every color.  Books, balances, and quills litter the floor.  It has reddish cherry wood doors on the south and east sides.',
   item: {name: null, strength: null, text: null},
@@ -159,6 +161,4 @@ let Fifteen = {
 
 let rooms = [Zero, One, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Eleven, Twelve, Thirteen, Fourteen, Fifteen];
 
-module.exports = rooms;
-
-//sword, turkey drumstick, axe, dagger
+fs.writeFileSync('rooms.json', JSON.stringify(rooms));
