@@ -10,5 +10,4 @@ const controllers = angular.module('controllers', []);
 controllers.controller('globalController', globalController);
 controllers.controller('gameController', gameController);
 
-
 export default controllers.name;
