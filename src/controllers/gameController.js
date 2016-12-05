@@ -8,13 +8,17 @@ export default function gameController(map, player) { //eslint-disable-line no-u
   this.roomDescription = map.rooms[player.room].description;
   this.directions = ['N', 'E', 'S', 'W'];
   this.moveButtons = true;
-
+  this.gameOver = false;
+  this.life = player.life;
+  this.alert = null;
+  this.progress = 1;
   var getRandomNum = function(){
     return Math.floor(Math.random() * 4) + 1;
   };
 
   this.newView = function() {
-    
+    this.life = player.life;
+    this.alert =null;
     this.talking=null;
     this.roomDescription = map.rooms[player.room].description;
 
@@ -32,15 +36,11 @@ export default function gameController(map, player) { //eslint-disable-line no-u
     if (map.rooms[player.room].monster) {
       isAlive = !!(map.rooms[player.room].monster.alive);
       if(isAlive){
-        console.log('monster alive');
         this.monsterText= map.rooms[player.room].monster.text;
       }
       else {
-        console.log('monster dead');
         if(map.rooms[player.room].monster.defeat){
-          console.log('monster has defeat Text');
           this.monsterText= map.rooms[player.room].monster.defeat;
-          console.log('deafeat text is', map.rooms[player.room].monster.defeat);
         } 
       }
     }
@@ -63,6 +63,10 @@ export default function gameController(map, player) { //eslint-disable-line no-u
       console.log('Player is moving from room ', player.room);
       player.room = map.rooms[player.room][direction];
       console.log(' into ', player.room);
+      if(player.progress.indexOf(player.room) !== 0){
+        player.progress.push(player.room);
+        this.progress = player.progress.length;
+      }
       var entryPrefixes = ['You open the door and enter', 'Passing through the doorway you find yourself in', 'The room you entered is', 'As you close the door you make note of the room around you;'];
       var randomNum = getRandomNum();
 
@@ -70,7 +74,7 @@ export default function gameController(map, player) { //eslint-disable-line no-u
       this.newView();
     }
     else {
-      alert('You cannot move in that direction.');
+      this.alert= 'You cannot move in that direction.';
     }
     console.log('I am in ', player.room);
 
@@ -78,9 +82,6 @@ export default function gameController(map, player) { //eslint-disable-line no-u
 
   this.equip = function(){
     var dropped = player.item;
-    console.log('clicked equip item');
-    console.log('something in the room');
-    console.log(map.rooms[player.room].item);
     player.item=map.rooms[player.room].item;
     map.rooms[player.room].item=dropped;
     if (dropped.name != null){
@@ -89,27 +90,20 @@ export default function gameController(map, player) { //eslint-disable-line no-u
     else{
       map.rooms[player.room].item = dropped;
     }
-
-    console.log('I have this equipped: ', player.item.name);
-
     this.playerItemName = player.item.name;
     this.playerItemStrength = player.item.strength;
     this.newView();
   };
 
   this.fight = function(){
-    console.log('clicked fight');
-
     let playerRoom = player.room;
     let monster = map.rooms[playerRoom].monster;
-    console.log('is fighting this a(n) '+ monster.name+ ' with a(n) '+player.item.name);
       // var randomNum = getRandomNum();
       // var playerStrength = item.strength*randomNum;
       // Cheat code:
     var playerStrength = 100;
-    console.log('Player Attack is ', playerStrength);
     if (playerStrength >= monster.strength){
-      alert('Congratulations!  You defeated the '+ monster.name+'.');
+      this.alert =`Congratulations!  You defeated the ${monster.name}.`;
       monster.alive = false;
       map.rooms[playerRoom].item = monster.item; //TODO: consider what happens when there's already an item in the room.
       monster.item = null;
@@ -117,8 +111,8 @@ export default function gameController(map, player) { //eslint-disable-line no-u
       this.newView();
     }
     else{
-      location.reload();
-      alert('Alas!  You were killed by the '+ monster.name+'.');
+      this.alert =`Alas!  You were killed by the ${monster.name}.`;
+      this.endGame();
     }
 
   };
@@ -132,20 +126,15 @@ export default function gameController(map, player) { //eslint-disable-line no-u
     var randomRoom = map.rooms[playerRoom][this.directions[getRandomNum()]];
     if(randomRoom != null) {
       playerRoom = randomRoom;
-      console.log(`is in room ${playerRoom}`);
       this.newView();
     } else {
-      console.log('the was no room in that direction. ran into a wall and died.');
-      location.reload();
-      alert('there was no room in that direction. ran into a wall and died. game over.');
-
+      this.alert= 'There was no room in that direction. ran into a wall and died. game over.';
+      this.endGame();
     }
 
   };
 
   this.give = function() {
-    console.log('give button being clicked');
-
     let playerRoom = player.room;
     let monster = map.rooms[playerRoom].monster;
 
@@ -173,13 +162,17 @@ export default function gameController(map, player) { //eslint-disable-line no-u
       this.giveButton = false;
 
     } else {
-      if(player.item.name === null) {
-        this.talk = 'FOOLISH ONE. are you trying to trick me by giving me nothing!?!';
-      } else {
-        alert('the orc mistook your attempt to hand him a gift as an attack with a weapon, jumped up and crushed you with his landing. game over.');
-
+      if(player.item === map.rooms[playerRoom].monster.wants){
+        this.alert('The' + map.rooms[playerRoom].monster.name + ' happily takes the '+ map.rooms[playerRoom].monster.wants + ' from you.');
       }
-      location.reload();
+      else if(player.item.name === null) {
+        this.talking = 'FOOLISH ONE. are you trying to trick me by giving me nothing!?!';
+        this.alert = `The ${monster.name} immediately attacks you.  You are unable to defend yourself in time and succumb to their attack.  Game over.`;
+        this.endGame();
+      } else {
+        this.alert = `The ${monster.name} mistook your attempt to hand them a gift as an attack and immediately attacks you.  You are unable to defend yourself in time and succumb to their attack.  Game over.`;
+        this.endGame();
+      }
     }
   };
 
@@ -188,11 +181,19 @@ export default function gameController(map, player) { //eslint-disable-line no-u
 
     let monsterName = map.rooms[player.room].monster.name;
     let monsterResponse = map.rooms[player.room].monster.response;
-    console.log('clicked talk');
-    console.log('is talking to this monster: '+ monsterName);
     if(monsterResponse === null){
-      alert(monsterName+ ' is NOT in a talking mood!');
+      alert(monsterName+ ' is NOT in a talking mood!  You engage in battle.');
       this.fight();
+    }
+    else if(monsterName === 'elephant'){
+      this.talking = 'Thank you for acknowledging the elephant in the room.';
+      this.alert = 'Pleased that you acknowledged him, the elephant gives you some ivory armor that adds 10 life to your life total.  You do not ask where it comes from';
+      player.life += 10;
+      this.life = player.life;
+      this.moveButtons =true;
+      this.talkButton = false;
+      this.fightButton = false;
+      this.runButton = false;
     }
     else{
       this.talking = monsterResponse;
@@ -200,4 +201,17 @@ export default function gameController(map, player) { //eslint-disable-line no-u
     }
   };
 
+  this.endGame = function(){
+    this.gameOver = true;
+    this.moveButtons =false;
+    this.talkButton = false;
+    this.giveButton = false;
+    this.fightButton = false;
+    this.runButton = false;
+    console.log(player.progress);
+  };
+
+  this.newGame = function(){
+    location.reload();
+  };
 }

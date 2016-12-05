@@ -15,7 +15,7 @@ let Zero = new Room(
       1, 
       '  A flask containing a clear potion, or water, is sticking out of the dead alchemists\'s pocket.'
     ),
-    ''
+    null
   ),
   null,
   1,
@@ -46,7 +46,7 @@ let Two = new Room(
     '  A huge, ferocious troll stands in the back of the room wielding a giant warhammer, terryfying expression on his (her?) face.',
     ' The huge body of the troll lies across the anvil in the center of the room.  His hammer is too big for you to carry.',
     null,
-    ''
+    null
   ),
   null,
   3,
@@ -67,7 +67,7 @@ let Three = new Room(
       20,
       ' The knights deadly-looking long sword lies on the ground next to his body.'
     ),
-    ''
+    null
   ),
   null,
   null,
@@ -93,13 +93,13 @@ let Five = new Room(
     8, 
     '  A beautiful maiden is standing in the center of the room.  She backs away from you with a terrified expression.', 
     '  The formerly beautiful dead maiden lays face down on the blood-stained carpet.',
-    '',
+    null,
     new Item(
       'pearl-handled dagger',
       8, 
       '  A glittering dagger with a large pearl on the pommel lays on the carpet several feet from the dead maiden.'
     ),
-    ''
+    null
   ),
   1,
   6,
@@ -117,7 +117,7 @@ let Six = new Room(
     '  the remains of the majestic creature lie on the ground.  You feel deeply ashamed.  There is nothing work taking.  Too late do you realize this was not the best way to acknowledge the elephant in the room.', 
     'I\'m the elephant in the room',
     null,
-    ''
+    null
   ),
   null,
   null,
@@ -172,7 +172,7 @@ let Nine = new Room(
 );
 
 let Ten = new Room(
-  '',
+  null,
   null,
   null,
   null,
@@ -182,7 +182,7 @@ let Ten = new Room(
 );
 
 let Eleven = new Room(
-  '',
+  null,
   null,
   null,
   7,
@@ -216,7 +216,7 @@ let Thirteen = new Room(
 );
 
 let Fourteen = new Room(
-  '',
+  null,
   null,
   null,
   10,
@@ -226,7 +226,7 @@ let Fourteen = new Room(
 );
 
 let Fifteen = new Room(
-  '',
+  null,
   null,
   null,
   11,
