@@ -38,15 +38,17 @@ let One = new Room(
 );
 
 let Two = new Room(
-  '  a dark forge, lit only by the orange and red glow of the giant furnace, full of liquid ore.  You seer large iron doors to the east and west.  A large, worn anvil stands in the center of the room.  The body of an armored knigh lies dead on the floor by the anvil.',
+  '  a dark forge, lit only by the orange and red glow of the giant furnace, full of liquid ore.  You see large iron doors to the east and west.  A large, worn anvil stands in the center of the room.  The body of an armored knight lies dead on the floor by the anvil.',
   null,
   new Monster(
     'Troll',
     65,
-    '  A huge, ferocious troll stands in the back of the room wielding a giant warhammer, terryfying expression on his (her?) face.',
+    '  A huge, ferocious troll stands in the back of the room wielding a giant warhammer, terrifying expression on his (her?) face.',
     ' The huge body of the troll lies across the anvil in the center of the room.  His hammer is too big for you to carry.',
+    ' I am not feeling well. Do you have anything to help with the pain?',
     null,
-    null
+    'red potion',
+    true
   ),
   null,
   3,
@@ -61,7 +63,8 @@ let Three = new Room(
     'white knight',
     30,
     '  A knight, in bright, silvery armor stands up from the table as you enter, his gauntleted hand resting on the hilt of his longsword.',
-    '  A knight in dented armor lies dead on teh floor by the table.',
+    '  A knight in dented armor lies dead on the floor by the table.',
+    'blahblahblah',
     new Item(
       'long sword',
       20,
@@ -127,7 +130,10 @@ let Six = new Room(
 
 let Seven = new Room(
   'you enter a dark room. the lights flicker a bit. you look around and see doors to your north and south.',
-  null,
+  new Item('magical flute',
+  1,
+  ' a magical flute sits in the middle of the room under a spotlight. it sings the most beautiful song in all the land.'
+),
   null,
   3,
   null,
@@ -193,7 +199,7 @@ let Eleven = new Room(
     'hssssss, i am tri-serpant. I am too devious talk to you! What doo youuuu wantt?!?',
     new Item(
       'venom fang',
-      10,
+      20,
       '  A sharp and mystical venom fang lies on the ground after having fallen out of the mouth of the serpant during battle.'
     ),
     'magical flute'
@@ -229,19 +235,19 @@ let Thirteen = new Room(
 );
 
 let Fourteen = new Room(
-  ' : this room seems different than the other rooms. the ceiling is much higher and the room is well decorated with royal garments. a chandlier even hangs from the ceiling. you step a bit more into a room and a large three headed white dragon with green eyes swoops down. the ground shakes and you struggle to keep your balance.',
+  ' a room that seems different than the other rooms. the ceiling is much higher and the room is well decorated with royal garments. a chandlier even hangs from the ceiling. you step a bit more into a room and a large three headed white dragon with green eyes swoops down. the ground shakes and you struggle to keep your balance.',
 
   null,
   new Monster(
     'King Dragoone',
     75,
-    'You hear the words: I am king dragoon! i art king dragoon! i am the royal dragooniness! DRAGOON ROARRRRR.',
+    '  You hear the words: I am king dragoon! i art king dragoon! i am the royal dragooniness! DRAGOON ROARRRRR.',
     '  After a long and tiring battle, you are barely able to stand. A shiny Dragons paw sword glows on the ground where the dragon had fallen.',
-    'King Dragoon: WHO DARES DISTURB ME?! I have ruled countless lands and conquered many seas. How dare you enter my royal lair?!',
+    '  King Dragoon: WHO DARES DISTURB ME?! I have ruled countless lands and conquered many seas. How dare you enter my royal lair?!',
     new Item(
       'Dragons paw',
       50,
-      '  A sharp and mystical venom fang lies on the ground after having fallen out of the mouth of the serpant during battle.'
+      '  A sharp and mystical paw lies on the ground after having fallen from the dragon.'
     ),
     'lands oldest treasure'
   ),   10,

@@ -3,7 +3,7 @@ gameController.$inject = ['GameSpace', 'Player'];
 export default function gameController(map, player) { //eslint-disable-line no-unused-vars
 
   player.setLocation(map.startLocation);
-  
+
   this.prefix = 'You wake up in a dungeon with a pounding headache.  As your eyes focus you notice that the room around you,';
   this.roomDescription = map.rooms[player.room].description;
   this.directions = ['N', 'E', 'S', 'W'];
@@ -12,6 +12,8 @@ export default function gameController(map, player) { //eslint-disable-line no-u
   this.life = player.life;
   this.alert = null;
   this.progress = 1;
+  this.ending = 'GAME OVER!';
+
   var getRandomNum = function(){
     return Math.floor(Math.random() * 4) + 1;
   };
@@ -21,6 +23,8 @@ export default function gameController(map, player) { //eslint-disable-line no-u
     this.alert =null;
     this.talking=null;
     this.roomDescription = map.rooms[player.room].description;
+    this.playerItemName = player.item.name;
+    this.playerItemStrength = player.item.strength;
 
     if (map.rooms[player.room].item) {
       this.equipButton = true; //if item is != null, equipButton is true.
@@ -41,7 +45,7 @@ export default function gameController(map, player) { //eslint-disable-line no-u
       else {
         if(map.rooms[player.room].monster.defeat){
           this.monsterText= map.rooms[player.room].monster.defeat;
-        } 
+        }
       }
     }
     else {
@@ -81,7 +85,11 @@ export default function gameController(map, player) { //eslint-disable-line no-u
   };
 
   this.equip = function(){
+    // if(player.item){
     var dropped = player.item;
+    // } else {
+    //   dropped = null;
+    // }
     player.item=map.rooms[player.room].item;
     map.rooms[player.room].item=dropped;
     if (dropped.name != null){
@@ -90,8 +98,6 @@ export default function gameController(map, player) { //eslint-disable-line no-u
     else{
       map.rooms[player.room].item = dropped;
     }
-    this.playerItemName = player.item.name;
-    this.playerItemStrength = player.item.strength;
     this.newView();
   };
 
@@ -109,6 +115,9 @@ export default function gameController(map, player) { //eslint-disable-line no-u
       monster.item = null;
       this.prefix = 'As your bloodlust settles down, you notice that you are still in';
       this.newView();
+      console.log(monster);
+      console.log('room: ' ,map.rooms[playerRoom]);
+      if(monster.name === 'King Dragoone'){ this.winGame();}
     }
     else{
       this.alert =`Alas!  You were killed by the ${monster.name}.`;
@@ -152,20 +161,35 @@ export default function gameController(map, player) { //eslint-disable-line no-u
       map.rooms[playerRoom].description = ' a now, much-happier scene; ';
       map.rooms[playerRoom].monster.defeat= 'there is now a happy orc laying down and eating the juicy turkey drumstick';
       map.rooms[playerRoom].monster.alive = false;
-      this.roomDescription = '';
       this.monsterText ='  The hungry orc is touched by your generous gift of food.';
       this.talking = 'Orc: young traveler, i am very happy with this gift. please take this thousand year old sword: Excaliborc. may it guide you in your journey.';
-      this.runButton = false;
-      this.fightButton =false;
-      this.talkButton = false;
-      this.moveButtons = true;
-      this.giveButton = false;
+      this.interactionSuccess();
+
 
     } else {
-      if(player.item === map.rooms[playerRoom].monster.wants){
-        this.alert('The' + map.rooms[playerRoom].monster.name + ' happily takes the '+ map.rooms[playerRoom].monster.wants + ' from you.');
-      }
-      else if(player.item.name === null) {
+      if(player.item.name === map.rooms[playerRoom].monster.wants){
+        this.alert = 'The' + map.rooms[playerRoom].monster.name + ' happily takes the '+ map.rooms[playerRoom].monster.wants + ' from you.';
+        monster.response = ' Thank you. This will help greatly.';
+        var temp = monster.item;
+        if(monster.item === null){
+          monster.item = player.item;
+          player.item =  { name: null, strength: null, text: null };
+        } else {
+          monster.item = player.item;
+          player.item = temp;
+          monster.talking = `Thank you for ${monster.item.name}. Please take this ${player.item.name}.`;
+        }
+        if(monster.name === 'Troll'){
+          monster.alive = false;
+          this.monsterText = 'The orc takes a drink and immediately looks healthier.';
+          monster.defeat = '  A large and healthy seeming troll is busy working at his forge.';
+          this.talking = ' Troll: Thank you for the healing potion. I am feeling much better. I do not have anything to give you, but if you bring me a weapon, I will sharpen it for you.';
+          this.monsterText = monster.text;
+          this.interactionSuccess();
+          console.log('playeritem: ', player.item);
+
+        }
+      } else if(player.item.name === null) {
         this.talking = 'FOOLISH ONE. are you trying to trick me by giving me nothing!?!';
         this.alert = `The ${monster.name} immediately attacks you.  You are unable to defend yourself in time and succumb to their attack.  Game over.`;
         this.endGame();
@@ -173,6 +197,9 @@ export default function gameController(map, player) { //eslint-disable-line no-u
         this.alert = `The ${monster.name} mistook your attempt to hand them a gift as an attack and immediately attacks you.  You are unable to defend yourself in time and succumb to their attack.  Game over.`;
         this.endGame();
       }
+      monster.defeat = 'The serpant is happily dancing along to the magical self-playing flute.';
+      monster.alive = false;
+      this.newView();
     }
   };
 
@@ -190,15 +217,23 @@ export default function gameController(map, player) { //eslint-disable-line no-u
       this.alert = 'Pleased that you acknowledged him, the elephant gives you some ivory armor that adds 10 life to your life total.  You do not ask where it comes from';
       player.life += 10;
       this.life = player.life;
-      this.moveButtons =true;
-      this.talkButton = false;
-      this.fightButton = false;
-      this.runButton = false;
+      this.interactionSuccess();
+
     }
     else{
       this.talking = monsterResponse;
       this.giveButton = true;
     }
+  };
+
+  this.interactionSuccess = function(){
+    this.prefix = null;
+    this.runButton = false;
+    this.fightButton =false;
+    this.talkButton = false;
+    this.moveButtons = true;
+    this.giveButton = false;
+    this.roomDescription = null;
   };
 
   this.endGame = function(){
@@ -208,6 +243,18 @@ export default function gameController(map, player) { //eslint-disable-line no-u
     this.giveButton = false;
     this.fightButton = false;
     this.runButton = false;
+    console.log(player.progress);
+  };
+
+  this.winGame = function(){
+    this.ending = 'Victory! You have defeated the dragon and won the game!';
+    this.gameOver = true;
+    this.moveButtons =false;
+    this.talkButton = false;
+    this.giveButton = false;
+    this.fightButton = false;
+    this.runButton = false;
+    this.equipButton = false;
     console.log(player.progress);
   };
 
