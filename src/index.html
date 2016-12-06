@@ -40,7 +40,7 @@
       </span>
     </div>
       <div class="sub-content" id="game-over-page" ng-show="gc.gameOver">
-    <h1>Game Over!</h1>
+    <h1>{{gc.ending}}</h1>
     <h2>You survived {{gc.progress}} rooms of the dungeon.</h2>
     <button id="play-btn" ng-click="gc.newGame();">Play Again</button>
   </div>
