@@ -5,7 +5,7 @@ import Room from '../src/models/room';
 import Item from '../src/models/item';
 import Monster from '../src/models/monster';
 
-describe ('gameController test2', () => {
+describe ('gameController', () => {
 
   beforeEach(angular.mock.module('orcSlayer'));
 
