@@ -25,7 +25,6 @@ describe ('gameController', () => {
   }));
 
   it ('should move player from room to room', () => {
-    // create two rooms; put player in 1 and move to 2
     let map = {
       rooms: [
         new Room('Room 0', null, null, 1, null, null, null),
