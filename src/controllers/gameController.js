@@ -62,12 +62,9 @@ export default function gameController(map, player) { //eslint-disable-line no-u
 
 
   this.move = function(direction){
-    console.log('moved in this direction', direction);
     if (map.rooms[player.room][direction] != null){
-      console.log('Player is moving from room ', player.room);
       player.room = map.rooms[player.room][direction];
-      console.log(' into ', player.room);
-      if(player.progress.indexOf(player.room) !== 0){
+      if(player.progress.indexOf(player.room) === -1){
         player.progress.push(player.room);
         this.progress = player.progress.length;
       }
@@ -80,8 +77,6 @@ export default function gameController(map, player) { //eslint-disable-line no-u
     else {
       this.alert= 'You cannot move in that direction.';
     }
-    console.log('I am in ', player.room);
-
   };
 
   this.equip = function(){
@@ -104,10 +99,10 @@ export default function gameController(map, player) { //eslint-disable-line no-u
   this.fight = function(){
     let playerRoom = player.room;
     let monster = map.rooms[playerRoom].monster;
-      // var randomNum = getRandomNum();
-      // var playerStrength = item.strength*randomNum;
+    var randomNum = getRandomNum();
+    var playerStrength = player.item.strength*randomNum;
       // Cheat code:
-    var playerStrength = 100;
+    // var playerStrength = 100;
     if (playerStrength >= monster.strength){
       this.alert =`Congratulations!  You defeated the ${monster.name}.`;
       monster.alive = false;
@@ -115,8 +110,6 @@ export default function gameController(map, player) { //eslint-disable-line no-u
       monster.item = null;
       this.prefix = 'As your bloodlust settles down, you notice that you are still in';
       this.newView();
-      console.log(monster);
-      console.log('room: ' ,map.rooms[playerRoom]);
       if(monster.name === 'King Dragoone'){ this.winGame();}
     }
     else{
@@ -129,9 +122,6 @@ export default function gameController(map, player) { //eslint-disable-line no-u
   this.run = function() {
 
     let playerRoom = player.room;
-    let monster = map.rooms[playerRoom].monster;
-    console.log('clicked run');
-    console.log('is running away from this monster: '+ monster.name);
     var randomRoom = map.rooms[playerRoom][this.directions[getRandomNum()]];
     if(randomRoom != null) {
       playerRoom = randomRoom;
