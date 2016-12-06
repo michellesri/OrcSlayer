@@ -2,82 +2,80 @@
 const { assert } = chai;
 import Player from '../src/models/player';
 import Room from '../src/models/room';
+import Item from '../src/models/item';
+import Monster from '../src/models/monster';
 
-describe.skip ( 'gameController', () => {
+describe ('gameController', () => {
 
-  beforeEach(angular.mock.module('controllers'));
+  beforeEach(angular.mock.module('orcSlayer'));
 
-  let $controller, $scope;
+  let $controller, gc;
 
-  beforeEach(angular.mock.inject(function($rootScope, _$controller_) {
-    $scope = $rootScope.$new();
+  class SingleRoom {
+    constructor() {
+      this.rooms = [
+        new Room('Room 0', null, null, null, null, null, null)
+      ];
+      this.startLocation = 0;
+    }
+  }
+
+  beforeEach(angular.mock.inject(function(_$controller_) {
     $controller = _$controller_;
-  }));
-
-  it ('player moves from one room to another', () => {
-    // $scope.player = { room: 1 }; // player starts in room 1
-    // $scope.rooms = [
-    //   { N: null, S: 1, E: null, W: null },
-    //   { N: 0, S: null, E: null, W: null }
-    // ];
-    var gc = $controller('gameController', { $scope });
-    gc.move('N');
-    assert.equal($scope.player.room, 0); // player should have moved to room 0
-  });
-
-  it ('player can pick up an item', () => {
-    var gc = $controller('gameController', { $scope });
-    $scope.player.room = 0;
-    gc.equip();
-    assert.equal($scope.player.item.name, 'turkey drumstick');
-  });
-
-  it ('player drops current item if she picks up a new one', () => {
-    var gc = $controller('gameController', { $scope });
-    $scope.player.room = 2;
-    gc.equip();
-    assert.equal($scope.player.item.name, 'sword');    
-  });
-
-});
-
-describe ('gameController test2', () => {
-
-  // beforeEach(module('orcSlayer'));
-
-  // let ctrl;
-
-  // beforeEach(inject(function($controller) {
-  //   ctrl = $controller('gameController');
-  // }));
-
-  beforeEach(angular.mock.module('controllers'));
-
-  let $controller, $scope, gc, player;
-
-  beforeEach(angular.mock.inject(function($rootScope, _$controller_) {
-    $scope = $rootScope.$new();
-    $controller = _$controller_;
-    gc = $controller('gameController', { $scope });
   }));
 
   it ('should move player from room to room', () => {
-    // create two rooms; put player in 1 and move to 2
-    $scope.rooms = [
-      new Room('Room 0', null, null, 1, null, null, null),
-      new Room('Room 1', null, null, null, null, 0, null)
-    ];
-    player = new Player(0);
+    let map = {
+      rooms: [
+        new Room('Room 0', null, null, 1, null, null, null),
+        new Room('Room 1', null, null, null, null, 0, null)
+      ],
+      startLocation: 0
+    };
+    let player = new Player();
+
+    gc = $controller('gameController', { 'GameSpace': map, 'Player': player });
     gc.move('N');
     assert.equal(player.room, 1);
   });
 
   it ('should equip player with item', () => {
-    assert(false);
+    let map = new SingleRoom();
+    map.rooms[0].item = new Item('thing', 0, 'this is a thing');
+    let player = new Player();
+    gc = $controller('gameController', { 'GameSpace': map, 'Player': player });
+    gc.equip();
+    assert.equal(player.item.name, 'thing');
   });
 
   it ('should leave item in room when player drops it', () => {
-    assert(false);
+    let map = new SingleRoom();
+    map.rooms[0].item = new Item('thing2', 0, 'this is a thing2');
+    let player = new Player();
+    player.item = new Item('thing1', 0, 'this is thing1');
+    gc = $controller('gameController', { 'GameSpace': map, 'Player': player });
+    gc.equip();
+    assert.equal(player.item.name, 'thing2');
+    assert.equal(map.rooms[0].item.name, 'thing1');
+  });
+
+  it ('player should win if strength is greater than monsters\'...', () => {
+    let map = new SingleRoom();
+    let monster = new Monster(
+      'Teddy Bear', 
+      5, 
+      'A fuzzy teddy bear stands there with open arms.', 
+      'A teddy bear lies on the floor with stuffing strewn all over the room.', 
+      'I love you!', 
+      new Item('blanket', 0, 'security blanket'), 
+      'hugs'
+    );
+    map.rooms[0].monster = monster;
+    let player = new Player();
+    player.item = new Item('pillow', 10, 'this is a pillow');
+    gc = $controller('gameController', { 'GameSpace': map, 'Player': player });
+    gc.fight();
+    assert(!map.rooms[0].monster.alive);
   });
 
 });

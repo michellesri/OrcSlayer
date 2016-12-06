@@ -6,13 +6,13 @@ module.exports = function(config) {
     basePath: '',
     frameworks: [ 'mocha', 'chai' ],
     files: [
-      './build/orcSlayer.js',
+      './src/index.js',
       './node_modules/angular-mocks/angular-mocks.js',
       './test/**/*.js'
     ],
     webpack: webpackConfig,
     preprocessors: {
-      './src/orcSlayer.js': [ 'webpack' ],
+      './src/index.js': [ 'webpack' ],
       './test/**/*.js': [ 'webpack' ]
     },
     browsers: [ 'Chrome' ], //, 'Safari' ],
