@@ -14,6 +14,7 @@ module.exports = {
     }),
     new ExtractTextPlugin('main.css')
   ],
+  devtool: 'source-map',
   module: {
     preLoaders: [{
       test: /\.js$/,
